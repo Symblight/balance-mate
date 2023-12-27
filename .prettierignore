@@ -1,0 +1,10 @@
+packages/*/CHANGELOG.md
+packages/*/coverage/*
+packages/*/dist/*
+packages/*/build/*
+dist/
+build/
+temp/
+pnpm-lock.yaml
+pnpm-workspace.yaml
+.gitignore
