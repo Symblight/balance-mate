@@ -33,7 +33,12 @@ jobs:
           scope: "@{scope}"
       - name: 📦 Install dependencies
         run: pnpm install
+
       - name: "📦 run build"
         run: pnpm run build
+
+      - name: "🔍 lint code"
         run: pnpm run lint
+        
+      - name: "🔍 test code"
         run: pnpm run test

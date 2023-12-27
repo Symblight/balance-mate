@@ -1,12 +1,32 @@
 {
   "name": "client",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": ""
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.jsx,.svelte . --config ./.eslintrc",
+    "format": "prettier --write .",
+    "check": "svelte-check --tsconfig ./tsconfig.json"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "files": [
+    "build/"
+  ],
+  "dependecies": {
+    "ui": "workspace:^"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.0.1",
+    "@tsconfig/svelte": "^5.0.2",
+    "svelte": "^4.2.8",
+    "svelte-check": "^3.6.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "pv-wb": "workspace:^"
+  }
 }
