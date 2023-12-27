@@ -1,0 +1,17 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  color: inherit;
+  font-style: normal;
+  line-height: 0;
+  text-align: center;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-size: inherit;
+
+  --stroke-width: 2px;
+}
+
+svg > path {
+  stroke-width: var(--stroke-width);
+}

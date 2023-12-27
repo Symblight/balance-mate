@@ -1,12 +1,130 @@
 {
-  "name": "ui",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "name": "pv-wb",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "/dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": ""
+    "dev": "vite",
+    "build": "wireit",
+    "build-css": "node ./scripts/build-css.mjs",
+    "build:icons": "node ./scripts/build-icons.mjs",
+    "build:vite": "tsc && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "package": "npm run clean && npm run build",
+    "prepublishOnly": "npm run package",
+    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore",
+    "format": "prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "test:runner": "web-test-runner --coverage",
+    "test:dev": "web-test-runner --coverage --dev",
+    "test:component": "npm run test -- --group",
+    "test:watch": "web-test-runner --coverage --watch",
+    "test:debug": "web-test-runner --coverage --watch --debug",
+    "test:headless": "web-test-runner --coverage --watch --debug --headless"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "dependencies": {
+    "@lit-labs/observers": "^2.0.2",
+    "@open-wc/testing": "^4.0.0",
+    "lit": "^3.1.0",
+    "svgo": "^3.1.0"
+  },
+  "devDependencies": {
+    "@open-wc/eslint-config": "^12.0.2",
+    "@playwright/test": "^1.40.1",
+    "@storybook/addon-essentials": "^7.6.5",
+    "@storybook/addon-links": "^7.6.5",
+    "@storybook/addons": "^7.6.6",
+    "@storybook/blocks": "^7.6.5",
+    "@storybook/theming": "^7.6.6",
+    "@storybook/web-components": "^7.6.5",
+    "@storybook/web-components-vite": "^7.6.5",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@web/dev-server-esbuild": "^1.0.1",
+    "@web/test-runner": "^0.18.0",
+    "@web/test-runner-playwright": "^0.11.0",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.2",
+    "esbuild": "^0.19.9",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^10.5.4",
+    "postcss": "^8.4.32",
+    "prettier": "^3.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.5",
+    "rollup-plugin-postcss-lit": "^2.1.0",
+    "storybook": "^7.6.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8",
+    "vite-plugin-dts": "^3.6.4",
+    "wireit": "^0.14.1"
+  },
+  "files": [
+    "dist/"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./theme/theme.css": "./dist/theme.css"
+  },
+  "wireit": {
+    "build-ts": {
+      "command": "vite build",
+      "files": [
+        "lib/**/*.ts",
+        "lib/**/*.css"
+      ],
+      "output": [
+        "dist/**/*.js",
+        "dist/**/*.ts",
+        "dist/**/*.css",
+        "dist/**/*.js.map"
+      ],
+      "clean": "if-file-deleted"
+    },
+    "build": {
+      "command": "node ./scripts/build-css.mjs",
+      "dependencies": [
+        "build-ts"
+      ],
+      "files": [
+        "src/**/*.css"
+      ],
+      "output": [
+        "dist/theme.css"
+      ],
+      "clean": "if-file-deleted"
+    }
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "prettier"
+    ],
+    "plugins": [
+      "@typescript-eslint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
 }
