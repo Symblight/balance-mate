@@ -158,6 +158,7 @@ export default class PvButton extends LitElement {
   override render() {
     if (this.href) {
       return html`<a
+      role="button"
         part="button"
         class="button ${this.classes}"
         href=${this.href}
@@ -167,6 +168,7 @@ export default class PvButton extends LitElement {
       </a>`;
     }
     return html`<button
+    type="button"
       part="button"
       class="button ${this.classes}"
       ?disabled=${this.disabled}

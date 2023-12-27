@@ -1,11 +1,11 @@
 {
   "private": true,
   "name": "pv-wb",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "/dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "./dist/components/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "wireit",
@@ -74,7 +74,10 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js"
+      "import": {
+        "default": "./dist/index.js",
+        "types": "./dist/components/index.d.ts"
+      }
     },
     "./theme/theme.css": "./dist/theme.css"
   },

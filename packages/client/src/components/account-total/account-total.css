@@ -1,0 +1,20 @@
+.account-total__container {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+}
+
+.account-total__header {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.account-total__total-container {
+  display: flex;
+  column-gap: 1rem;
+  align-items: center;
+}
+
+.account-total__total-title {
+  padding: 0;
+  margin: 0;
+}

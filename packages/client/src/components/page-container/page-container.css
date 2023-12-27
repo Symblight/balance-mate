@@ -1,0 +1,8 @@
+.page-container {
+  margin: 0 auto;
+  max-width: 40rem;
+  width: 100%;
+  row-gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
