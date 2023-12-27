@@ -1,0 +1,11 @@
+@charset 'utf-8';
+
+@import "themes/dark.css";
+@import "themes/light.css";
+
+/* SETTINGS */
+@import "settings/colors.css";
+@import "settings/text.css";
+@import "settings/animations.css";
+@import "settings/variables.css";
+@import "settings/theme.css";
