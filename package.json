@@ -38,8 +38,5 @@
   "bugs": {
     "url": "git+https://github.com/Symblight/balance-mate/issues"
   },
-  "homepage": "https://github.com/Symblight/balance-mate/#readme",
-  "dependencies": {
-    "pv-wb": "workspace:^"
-  }
+  "homepage": "https://github.com/Symblight/balance-mate/#readme"
 }

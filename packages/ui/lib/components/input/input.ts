@@ -9,7 +9,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 
-import styles from "./input.css?inline" with { type: "css" };
+import styles from "./input.css?inline";
 
 export type InputSize = "xs" | "s" | "m" | "l";
 
@@ -21,7 +21,9 @@ export type InputSize = "xs" | "s" | "m" | "l";
 @customElement("pv-input")
 export default class PvInput extends LitElement {
   private prefixSlot: boolean;
+
   private suffixSlot: boolean;
+
   constructor() {
     super();
 
@@ -35,22 +37,28 @@ export default class PvInput extends LitElement {
 
   @property({ type: String, attribute: true })
   name = "";
-  @property({ type: String, attribute: true })
-  id = "";
+
   @property({ type: String, attribute: true })
   error = "";
+
   @property({ type: String, attribute: true })
   placeholder = "";
+
   @property({ type: Boolean, attribute: true })
   success = false;
+
   @property({ type: Boolean, attribute: true })
   active = false;
+
   @state()
   private _isFocusVisible: boolean = false;
+
   @property({ type: Boolean, attribute: true, reflect: true })
   disabled = false;
+
   @property({ type: String, attribute: true })
   size: InputSize = "m";
+
   @property({ type: Boolean, attribute: true, reflect: true })
   readOnly = false;
 
@@ -89,7 +97,10 @@ export default class PvInput extends LitElement {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
+    
     const slots = Array.from(this.shadowRoot?.host.children || []).map(
       (element) => element.attributes.getNamedItem("slot")
     );

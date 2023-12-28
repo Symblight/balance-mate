@@ -6,9 +6,9 @@ import "../icon.ts";
 
 import type PvIconProps from "../icon.ts";
 
-import { iconsLibrary } from "../../../icons";
+import { iconsLibrary } from "../../../icons/index.ts";
 
-function Template({}: PvIconProps) {
+function Template() {
   return html` ${Object.keys(iconsLibrary).map(
     (name) => html`<pv-icon name=${name}></pv-icon> `
   )}`;

@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "pv-wb",
+  "name": "pv-wc",
   "version": "0.1.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
     "build-storybook": "storybook build",
     "package": "npm run build",
     "prepublishOnly": "npm run package",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore",
+    "lint": "eslint --ext .ts . --ignore-path .gitignore",
     "format": "prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "test:runner": "web-test-runner --coverage",
     "test:dev": "web-test-runner --coverage --dev",
@@ -45,19 +45,18 @@
     "@types/jest": "^29.5.11",
     "@types/node": "^20.10.4",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@typescript-eslint/parser": "^6.16.0",
     "@web/dev-server-esbuild": "^1.0.1",
     "@web/test-runner": "^0.18.0",
     "@web/test-runner-playwright": "^0.11.0",
     "autoprefixer": "^10.4.16",
     "cssnano": "^6.0.2",
     "esbuild": "^0.19.9",
-    "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-lit": "^1.11.0",
     "husky": "^8.0.3",
     "lint-staged": "^10.5.4",
     "postcss": "^8.4.32",
-    "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.5",
@@ -109,15 +108,6 @@
       ],
       "clean": "if-file-deleted"
     }
-  },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "extends": [
-      "prettier"
-    ],
-    "plugins": [
-      "@typescript-eslint"
-    ]
   },
   "husky": {
     "hooks": {
