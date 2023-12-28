@@ -2,10 +2,11 @@
   "name": "balance-mate",
   "version": "1.0.0",
   "description": "track your balance",
+  "type": "module",
   "scripts": {
     "format": "prettier --write --cache .",
     "lint": "pnpm -r --filter='./packages/*' run lint",
-    "build": "pnpm -r --filter='./packages/*' run build",
+    "build": "wireit",
     "dev": "pnpm -r --parallel --filter='./packages/*' run dev",
     "test": "pnpm -r --parallel --filter='./packages/*' run test",
     "prepare": "husky install"
@@ -38,5 +39,16 @@
   "bugs": {
     "url": "git+https://github.com/Symblight/balance-mate/issues"
   },
-  "homepage": "https://github.com/Symblight/balance-mate/#readme"
+  "homepage": "https://github.com/Symblight/balance-mate/#readme",
+  "wireit": {
+    "build:web": {
+      "command": "pnpm -r --filter='./packages/*' run build"
+    },
+    "build": {
+      "command": "node ./tools/scripts/build-client",
+      "dependencies": [
+        "build:web"
+      ]
+    }
+  }
 }
