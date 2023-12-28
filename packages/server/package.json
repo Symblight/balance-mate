@@ -2,11 +2,31 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "/dist/main.js",
   "scripts": {
-    "test": ""
+    "build": "tsc --build",
+    "start": "node ./dist/main.js",
+    "dev": "DEBUG=fin-api:* nodemon --config .nodemonrc ./src/main.ts",
+    "lint": "eslint --ext .ts . --ignore-path .gitignore",
+    "format": "prettier \"**/*.ts\" --write --ignore-path .gitignore"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^6.12.0",
+    "config": "^3.3.9",
+    "debug": "^4.3.4",
+    "fastify": "^4.25.2",
+    "fastify-plugin": "^4.5.1",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/config": "^3.3.3",
+    "@types/debug": "^4.1.12",
+    "@types/node": "^20.10.4",
+    "@typescript-eslint/parser": "^6.16.0",
+    "nodemon": "^3.0.2",
+    "ts-node": "^10.9.2"
+  }
 }
