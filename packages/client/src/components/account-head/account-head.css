@@ -3,3 +3,14 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.account-head__brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.account-head__logo {
+  width: 42px;
+  height: 42px;
+}
