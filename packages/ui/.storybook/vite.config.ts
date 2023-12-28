@@ -1,7 +1,12 @@
 import { defineConfig } from "vite";
-import postcssLit from "rollup-plugin-postcss-lit";
+import path from 'node:path'
+import litcss from "rollup-plugin-postcss-lit";
 
 export default defineConfig({
   assetsInclude: ["/sb-preview/runtime.js"],
-  plugins: [postcssLit()],
+  plugins: [
+    litcss({
+      include: [path.join(__dirname, "../lib/components/**/*.css?*")],
+    }),
+  ],
 });

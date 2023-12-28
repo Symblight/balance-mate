@@ -5,7 +5,6 @@
     "useDefineForClassFields": false,
     "module": "ESNext",
     "lib": ["esnext.array", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
 
 
     /* Bundler mode */
@@ -33,13 +32,15 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "strictNullChecks": false
   },
   "include": [
-    "lib/**/*.ts"
+    "lib"
   ],
   "exclude": [
     "lib/**/*.test.ts",
     "lib/**/*.stories.ts",
+    "lib/**/*.css?inline",
   ]
 }

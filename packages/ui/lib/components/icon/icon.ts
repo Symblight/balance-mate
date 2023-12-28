@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 
 import { iconsLibrary } from "../../icons/index.ts";
 
-import styles from "./icon.css?inline" with { type: "css" };
+import styles from "./icon.css?inline";
 
 /**
  * @tag pv-icon
@@ -18,7 +18,9 @@ export default class PvIcon extends LitElement {
   }
 
   connectedCallback() {
-    super.connectedCallback();
+    if (super.connectedCallback) {
+      super.connectedCallback();
+    }
     this.getIcon(this.name);
   }
 

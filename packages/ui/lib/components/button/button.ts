@@ -4,9 +4,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { when } from "lit/directives/when.js";
 
-// import "../spin/spin.js";
-
-import styles from "./button.css?inline" with { type: "css" };
+import styles from "./button.css?inline";
 
 export type ButtonVariant =
   | "primary"
@@ -20,56 +18,57 @@ export type ButtonSize = "xs" | "s" | "m" | "l";
  * @tag pv-button
  * @summary Pavetra Button web component
  */
-
 @customElement("pv-button")
 export default class PvButton extends LitElement {
+  private _observer;
+
   constructor() {
     super();
     this.slotHasContent = false;
 
-    // eslint-disable-next-line no-new
-    new MutationController(this, {
+    this._observer = new MutationController(this, {
       config: {
         characterData: true,
         subtree: true,
       },
-      callback: (mutationsList) => {
-        for (const mutation of mutationsList) {
-          if (mutation.type === "characterData") {
-            this.manageTextObservedSlot();
-            return;
-          }
-        }
-      },
     });
+
+    this._observer.callback = (mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === "characterData") {
+          this.manageTextObservedSlot();
+          return;
+        }
+      }
+    };
   }
 
   @property()
-   variant: ButtonVariant = "primary";
+  variant: ButtonVariant = "primary";
 
   @property({ type: String, attribute: true })
-   size: ButtonSize = "m";
+  size: ButtonSize = "m";
 
   @property({ type: Boolean, attribute: true })
-   danger: boolean = false;
+  danger: boolean = false;
 
   @property({ type: Boolean, attribute: true })
-   loading: boolean = false;
+  loading: boolean = false;
 
   @property({ type: String, attribute: true })
-   href: boolean = false;
+  href: boolean = false;
 
   @property({ type: Boolean, attribute: true })
-   disabled: boolean = false;
+  disabled: boolean = false;
 
   @property({ type: Boolean, attribute: true })
-   rounded: boolean = false;
+  rounded: boolean = false;
 
   @state()
-   slotHasContent = false;
+  slotHasContent = false;
 
   @state()
-  icon: Element | null = null;
+  icon: Node | null = null;
 
   static get styles(): CSSResultGroup {
     return [styles as unknown as CSSResultOrNative];
@@ -93,13 +92,12 @@ export default class PvButton extends LitElement {
   }
 
   updateChildren() {
-    const iconSlot = this.shadowRoot?.querySelector('slot[name="icon"]');
+    const iconSlot = this.shadowRoot?.querySelector('slot[name="icon"]') as HTMLSlotElement;
     const icon = !iconSlot
       ? []
-      : // @ts-ignore
-        iconSlot.assignedElements().map((element: HTMLElement) => {
-          const newElement = element.cloneNode(true);
-          // @ts-ignore
+      :
+        iconSlot.assignedElements().map((element) => {
+          const newElement = element.cloneNode(true) as HTMLElement;
           newElement.removeAttribute("slot");
           return newElement;
         });
@@ -142,7 +140,7 @@ export default class PvButton extends LitElement {
         html`<div class="button__icon">
           <pv-spin class="button__spin" size="small"></pv-spin>
         </div>`,
-      () => html`<slot ?icon-only=${!this.slotHasContent} name="icon"></slot>`
+      () => html`<slot ?icon-only=${!this.slotHasContent} name="icon"></slot>`,
     );
   }
 
@@ -158,6 +156,7 @@ export default class PvButton extends LitElement {
   override render() {
     if (this.href) {
       return html`<a
+        role="button"
         part="button"
         class="button ${this.classes}"
         href=${this.href}
@@ -167,6 +166,7 @@ export default class PvButton extends LitElement {
       </a>`;
     }
     return html`<button
+      type="button"
       part="button"
       class="button ${this.classes}"
       ?disabled=${this.disabled}
