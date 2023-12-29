@@ -1,0 +1,39 @@
+@keyframes fade-in {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+:host {
+  color: var(--color-primary);
+}
+
+.spin {
+  display: flex;
+  align-items: center;
+}
+
+.spin__svg {
+  display: inline-block;
+  animation: fade-in 1s infinite linear;
+}
+
+.spin_size_l {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.spin_size_m {
+  width: 2rem;
+  height: 2rem;
+}
+
+.spin_size_s {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.spin_size_xs {
+  width: 1rem;
+  height: 1rem;
+}
