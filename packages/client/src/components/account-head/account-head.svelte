@@ -3,6 +3,8 @@
 </script>
 
 <div class="account-head__container">
-  <h1>My wallet</h1>
-  <div>DB status (sync)</div>
+  <div class="account-head__brand">
+    <img src="/logo.svg" alt="logo" class="account-head__logo" />
+    <h1>My wallet</h1>
+  </div>
 </div>

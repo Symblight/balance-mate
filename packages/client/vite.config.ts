@@ -3,8 +3,16 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
+  plugins: [
+    svelte({
+      onwarn: (warning, handler) => {
+        if (warning.code.startsWith("a11y-")) return;
+        console.log(warning)
+        handler(warning);
+      },
+    }),
+  ],
   build: {
-    outDir: "./build"
-  }
+    outDir: "./build",
+  },
 });

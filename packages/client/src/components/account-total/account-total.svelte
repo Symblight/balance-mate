@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./account-total.css";
 
-  function handleClick(e: any) {
+  function handleClick(e: Event) {
     console.log("click", e);
   }
 </script>
@@ -15,18 +15,14 @@
   </section>
 
   <section>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <pv-button
       on:click={handleClick}
-      aria-roledescription="button"
-      type="button"
+      on:keypress={handleClick}
+      variant="primary"
       role="button"
       tabindex="0"
     >
-      Income
+      Add transaction
     </pv-button>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
-    <pv-button on:click={handleClick} danger>Loss</pv-button>
   </section>
 </section>
