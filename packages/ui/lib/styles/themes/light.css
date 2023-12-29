@@ -1,12 +1,5 @@
 :root {
   color-scheme: light;
   /* || GENERAL STYLES */
-  --global-background: #fafafa;
   --global-foreground: var(--color-black);
-  --global-second-foreground: hsl(0, 0%, 15.7%);
-
-  /* || BUTTON GHOST */
-  --fg-button: hsl(0, 0%, 25.9%);
-  --fg-button-hover: hsl(0, 0%, 15.7%);
-  --bg-button-hover: hsl(0, 0%, 86.7%);
 }
