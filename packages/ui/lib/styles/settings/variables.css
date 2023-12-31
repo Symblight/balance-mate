@@ -14,4 +14,7 @@
   --border-radius-l: 0.95rem;
 
   --padding-inline: 14px;
+
+  --shadow-elevation: 0 2px 6px var(--color-opac-b-2),
+  0 0 4px var(--color-opac-b-1);
 }
