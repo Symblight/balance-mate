@@ -44,11 +44,14 @@ export default class PvTextField extends LitElement {
   @property({ type: Boolean, attribute: true, reflect: true })
   valid = false;
 
+  @property({ type: Boolean, attribute: true, reflect: true })
+  required = false;
+
   @property({ type: String, attribute: true })
   placeholder = "";
 
   @property({ type: Boolean, attribute: true })
-  active = false;
+  private active = false;
 
   @state()
   private _isFocusVisible: boolean = false;
@@ -78,9 +81,9 @@ export default class PvTextField extends LitElement {
   }
 
   private handleFocus() {
-    if (!this.disabled) {
-      this._isFocusVisible = true;
-    }
+    if (this.disabled) return;
+
+    this._isFocusVisible = true;
     const event = new Event("focus", {
       bubbles: true,
       composed: true,
@@ -90,6 +93,7 @@ export default class PvTextField extends LitElement {
   }
 
   private handleBlur() {
+    if (this.disabled) return;
     this._isFocusVisible = false;
     const event = new Event("blur", {
       bubbles: true,
@@ -116,15 +120,19 @@ export default class PvTextField extends LitElement {
 
   private renderPrefix() {
     if (!this.prefixSlot) return nothing;
-    return html` <div class="text-field__affix_space_left">
-      <div class="text-field__affix"><slot name="prefix"></slot></div>
+    return html`<div class="text-field__affix_space_left">
+      <div class="text-field__affix">
+        <slot name="prefix"></slot>
+      </div>
     </div>`;
   }
 
   private renderSuffix() {
     if (!this.suffixSlot) return nothing;
     return html` <div class="text-field__affix_space_right">
-      <div class="text-field__affix"><slot name="suffix"></slot></div>
+      <div class="text-field__affix">
+        <slot name="suffix"></slot>
+      </div>
     </div>`;
   }
 
@@ -149,19 +157,21 @@ export default class PvTextField extends LitElement {
     return html`<div
         part="box"
         class="text-field ${classMap({
-          "text-field_error": this.invalid,
-          "text-field_success": this.valid,
+          "text-field_status_error": this.invalid,
+          "text-field_status_success": this.valid,
+          "text-field_focused": this._isFocusVisible || this.active,
+          "text-field_disabled": this.disabled,
         })}"
-        data-focus=${this._isFocusVisible || this.active}
-        aria-disabled=${this.disabled}
       >
         ${this.renderPrefix()}
         <input
           part="input"
           .type=${this.type}
           .id=${this.id}
+          .name=${this.name}
           .value=${live(this.value)}
           .placeholder=${this.placeholder}
+          ?required=${this.required}
           ?readonly=${this.readOnly}
           ?disabled=${this.disabled}
           @input=${this.handleChange}
