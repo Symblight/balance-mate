@@ -9,17 +9,17 @@ import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 
-import styles from "./input.css?inline";
+import styles from "./text-field.css?inline";
 
-export type InputSize = "xs" | "s" | "m" | "l";
+export type TextFieldSize = "xs" | "s" | "m" | "l";
 
 /**
- * @tag pv-input
- * @summary Pavetra Input web component
+ * @tag pv-text-field
+ * @summary Pavetra Text Field web component
  */
 
-@customElement("pv-input")
-export default class PvInput extends LitElement {
+@customElement("pv-text-field")
+export default class PvTextField extends LitElement {
   private prefixSlot: boolean;
 
   private suffixSlot: boolean;
@@ -38,14 +38,14 @@ export default class PvInput extends LitElement {
   @property({ type: String, attribute: true })
   name = "";
 
-  @property({ type: String, attribute: true })
-  error = "";
+  @property({ type: Boolean, attribute: true, reflect: true })
+  invalid = false;
+
+  @property({ type: Boolean, attribute: true, reflect: true })
+  valid = false;
 
   @property({ type: String, attribute: true })
   placeholder = "";
-
-  @property({ type: Boolean, attribute: true })
-  success = false;
 
   @property({ type: Boolean, attribute: true })
   active = false;
@@ -57,10 +57,13 @@ export default class PvInput extends LitElement {
   disabled = false;
 
   @property({ type: String, attribute: true })
-  size: InputSize = "m";
+  size: TextFieldSize = "m";
 
   @property({ type: Boolean, attribute: true, reflect: true })
   readOnly = false;
+
+  @property()
+  type: HTMLInputElement["type"] = "text";
 
   /**
    * The current value of the text field. It is always a string.
@@ -100,9 +103,9 @@ export default class PvInput extends LitElement {
     if (super.connectedCallback) {
       super.connectedCallback();
     }
-    
+
     const slots = Array.from(this.shadowRoot?.host.children || []).map(
-      (element) => element.attributes.getNamedItem("slot")
+      (element) => element.attributes.getNamedItem("slot"),
     );
     const suffixSlot = slots.find((slot) => slot?.nodeValue === "suffix");
     const prefixSlot = slots.find((slot) => slot?.nodeValue === "prefix");
@@ -113,56 +116,77 @@ export default class PvInput extends LitElement {
 
   private renderPrefix() {
     if (!this.prefixSlot) return nothing;
-    return html` <div class="input__affix_space_left">
-      <div class="input__affix"><slot name="prefix"></slot></div>
+    return html` <div class="text-field__affix_space_left">
+      <div class="text-field__affix"><slot name="prefix"></slot></div>
     </div>`;
   }
 
   private renderSuffix() {
     if (!this.suffixSlot) return nothing;
-    return html` <div class="input__affix_space_right">
-      <div class="input__affix"><slot name="suffix"></slot></div>
+    return html` <div class="text-field__affix_space_right">
+      <div class="text-field__affix"><slot name="suffix"></slot></div>
     </div>`;
+  }
+
+  get textFieldSizeClass() {
+    const size = this.size || "m";
+    return {
+      "text-field__control_size_xs": size === "xs",
+      "text-field__control_size_s": size === "s",
+      "text-field__control_size_m": size === "m",
+      "text-field__control_size_l": size === "l",
+    };
+  }
+
+  get textFieldSpaceClass() {
+    return {
+      "text-field__control_space_r": this.prefixSlot,
+      "text-field__control_space_l": this.suffixSlot,
+    };
   }
 
   render() {
     return html`<div
-      part="box"
-      class="input ${classMap({
-        input_error: this.error,
-        input_success: this.success,
-      })}"
-      data-focus=${this._isFocusVisible || this.active}
-      aria-disabled=${this.disabled}
-    >
-      ${this.renderPrefix()}
-      <input
-        part="input"
-        ?readonly=${this.readOnly}
-        ?disabled=${this.disabled}
-        .placeholder=${this.placeholder}
-        .value=${live(this.value)}
-        .id=${this.id}
-        @input=${this.handleChange}
-        @focus=${this.handleFocus}
-        @blur=${this.handleBlur}
-        class="input__control ${classMap({
-          input__control_space_r: this.prefixSlot,
-          input__control_space_l: this.suffixSlot,
-          input__control_xs: this.size === "xs",
-          input__control_s: this.size === "s",
-          input__control_m: this.size === "m",
-          input__control_l: this.size === "l",
-          input__control_disabled: this.disabled,
+        part="box"
+        class="text-field ${classMap({
+          "text-field_error": this.invalid,
+          "text-field_success": this.valid,
         })}"
-      />
-      ${this.renderSuffix()}
-    </div>`;
+        data-focus=${this._isFocusVisible || this.active}
+        aria-disabled=${this.disabled}
+      >
+        ${this.renderPrefix()}
+        <input
+          part="input"
+          .type=${this.type}
+          .id=${this.id}
+          .value=${live(this.value)}
+          .placeholder=${this.placeholder}
+          ?readonly=${this.readOnly}
+          ?disabled=${this.disabled}
+          @input=${this.handleChange}
+          @focus=${this.handleFocus}
+          @blur=${this.handleBlur}
+          class="text-field__control ${classMap({
+            "text-field__control_disabled": this.disabled,
+            ...this.textFieldSpaceClass,
+            ...this.textFieldSizeClass,
+          })}"
+        />
+        ${this.renderSuffix()}
+      </div>
+      <div
+        class="text-field__help-text ${classMap({
+          "text-field__help-text_invalid": this.invalid,
+        })}"
+      >
+        <slot name="help-text"></slot>
+      </div>`;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    "pv-input": PvInput;
+    "pv-text-field": PvTextField;
   }
 }

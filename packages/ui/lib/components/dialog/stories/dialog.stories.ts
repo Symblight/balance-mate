@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/web-components";
 import "../../../styles/theme.css";
 import "../dialog.ts";
 import "../../button/button.ts";
-import "../../input/input.ts"
+import "../../text-field/text-field.ts"
 
 import type PvDialogProps from "../dialog.ts";
 
@@ -26,7 +26,7 @@ function Template({ open }: PvDialogProps) {
       <div>
         <form>
           Hello world
-          <pv-input></pv-input>
+          <pv-text-field></pv-text-field>
         </form>
       </div>
       <div slot="footer">

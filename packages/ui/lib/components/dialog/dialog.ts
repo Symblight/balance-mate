@@ -103,7 +103,7 @@ export default class PvDialog extends LitElement {
         <div>
           <h3 class="dialog__title">${this.headerTitle}</h3>
           <div class="dialog__button-close">
-            <pv-button variant="inline" size="m" @click=${this.close}>
+            <pv-button  variant="inline" size="m" @click=${this.close}>
               <pv-icon slot="icon" name="close"></pv-icon>
             </pv-button>
           </div>

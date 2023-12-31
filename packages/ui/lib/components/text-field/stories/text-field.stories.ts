@@ -2,9 +2,10 @@ import { html } from "lit";
 import { Meta, StoryObj } from "@storybook/web-components";
 
 import "../../../styles/theme.css";
-import "../input.ts";
+import "../text-field.ts";
+import "../../icon/icon.ts";
 
-import type PvInputProps from "../input.ts";
+import type PvTextFieldProps from "../text-field.ts";
 
 function Template({
   slot,
@@ -12,26 +13,34 @@ function Template({
   readOnly = false,
   size,
   value,
-}: PvInputProps) {
+  type,
+  invalid,
+  valid,
+  placeholder,
+}: PvTextFieldProps) {
   function handleChange(e) {
     console.log(e.target.value, "value");
   }
   return html`
-    <pv-input
+    <pv-text-field
       ?disabled=${disabled}
       ?readOnly=${readOnly}
+      ?invalid=${invalid}
+      ?valid=${valid}
       size=${size}
+      placeholder=${placeholder}
       value=${value}
+      type=${type}
       @change=${handleChange}
     >
       ${slot}
-    </pv-input>
+    </pv-text-field>
   `;
 }
 
 const meta = {
-  title: "Input",
-  component: "pv-input",
+  title: "TextField",
+  component: "pv-text-field",
   tags: ["autodocs"],
   render: Template,
   argTypes: {
@@ -45,14 +54,24 @@ const meta = {
     readOnly: {
       control: { type: "boolean" },
     },
-    value: {
+    invalid: {
+      control: { type: "boolean" },
+    },
+    valid: {
+      control: { type: "boolean" },
+    },
+    type: {
+      options: ["number", "text", "password"],
+      control: { type: "select" }, // Automatically inferred when 'options' is defined
+    },
+    placeholder: {
       control: { type: "text" },
     },
   },
-} satisfies Meta<PvInputProps>;
+} satisfies Meta<PvTextFieldProps>;
 export default meta;
 
-type Story = StoryObj<PvInputProps>;
+type Story = StoryObj<PvTextFieldProps>;
 export const Regular: Story = {
   args: {
     disabled: false,
@@ -67,4 +86,18 @@ export const SuffixPrefix: Story = {
     slot: html` <pv-icon slot="suffix" name="close"></pv-icon
       ><pv-icon slot="prefix" name="edit"></pv-icon>` as unknown as string,
   },
+};
+
+export const Invalid: Story = {
+  args: {
+    invalid: true,
+    valid: false,
+  },
+  render: ({ invalid }) =>
+    html`<label for="text-field">Username</label
+      ><pv-text-field id="text-field" ?invalid=${invalid}>
+        <span slot="help-text"
+          >This field is required. Please be "Positive"</span
+        >
+      </pv-text-field>`,
 };
