@@ -2,12 +2,6 @@
   :root {
     color-scheme: dark;
     /* || GENERAL STYLES */
-    --global-background: var(--color-light-black);
     --global-foreground: var(--color-white);
-
-    /* || BUTTON GHOST */
-    --fg-button: hsl(0, 0%, 61.6%);
-    --fg-button-hover: hsl(0, 0%, 86.7%);
-    --bg-button-hover: hsl(0, 0%, 19.2%);
   }
 }

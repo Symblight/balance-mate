@@ -4,6 +4,8 @@ import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { when } from "lit/directives/when.js";
 
+import "../spin/spin.ts";
+
 import styles from "./button.css?inline";
 
 export type ButtonVariant =
@@ -138,7 +140,7 @@ export default class PvButton extends LitElement {
       this.loading,
       () =>
         html`<div class="button__icon">
-          <pv-spin class="button__spin" size="small"></pv-spin>
+          <pv-spin class="button__spin" size="xs"></pv-spin>
         </div>`,
       () => html`<slot ?icon-only=${!this.slotHasContent} name="icon"></slot>`,
     );

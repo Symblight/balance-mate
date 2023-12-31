@@ -4,6 +4,8 @@
   width: auto;
   cursor: pointer;
 
+  --button-foreground-color: var(--global-foreground);
+
   --button-inline-hover-background-color: var(--color-opac-b-2);
   --button-inline-active-background-color: var(--color-opac-b-1);
   --button-inline-disabled-background-color: var(--color-opac-b-5);
@@ -48,6 +50,8 @@
 .button {
   display: inline-flex;
   position: relative;
+
+  font-family: inherit;
 
   justify-content: center;
   align-items: center;
@@ -101,6 +105,17 @@
   cursor: not-allowed;
 }
 
+.button__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 0.85rem;
+}
+
+.button__spin {
+  color: inherit;
+}
+
 /* || SIZE */
 .button_size_l {
   --button-font-size: 1rem;
@@ -123,40 +138,24 @@
 }
 
 /* || ICON */
-.button_icon.button_size_l {
+.button_icon:where(.button_size_l) {
   width: 2.625rem;
   --button-size: 2.625rem;
 }
 
-.button_icon.button_size_m {
+.button_icon:where(.button_size_m) {
   width: 2.25rem;
   --button-size: 2.25rem;
 }
 
-.button_icon.button_size_s {
+.button_icon:where(.button_size_s) {
   width: 2rem;
   --button-size: 2rem;
 }
 
-.button_icon.button_size_xs {
+.button_icon:where(.button_size_xs) {
   width: 1.8rem;
   --button-size: 1.8rem;
-}
-
-.button_icon {
-  width: 2.25rem;
-  --button-size: 2.25rem;
-}
-
-.button__content {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding-inline: 0.85rem;
-}
-
-.button__spin {
-  color: inherit;
 }
 
 /* || ROUNDED */
@@ -174,7 +173,7 @@
   font-size: 160%;
 }
 
-[icon-only]+#label {
+[icon-only] + #label {
   display: none;
 }
 
@@ -197,18 +196,6 @@
   color: var(--button-primary-foreground-color);
 }
 
-.button_variant_primary.button_danger {
-  background-color: var(--button-danger-background-color);
-}
-
-.button_variant_primary.button_danger:hover {
-  background-color: var(--button-danger-hover-background-color);
-}
-
-.button_variant_primary.button_danger:active {
-  background-color: var(--button-danger-active-background-color);
-}
-
 .button_variant_primary:hover {
   background-color: var(--button-primary-hover-background-color);
 }
@@ -217,7 +204,7 @@
   background-color: var(--button-primary-active-background-color);
 }
 
-.button_disabled.button_variant_primary {
+.button_variant_primary:where(.button_disabled) {
   color: var(--button-primary-foreground-color);
   background-color: var(--button-primary-disabled-background-color);
 }
@@ -235,20 +222,19 @@
   background-color: var(--button-secondary-active-background-color);
 }
 
-.button_disabled.button_variant_secondary {
+.button_variant_secondary:where(.button_disabled) {
   color: var(--button-secondary-disabled-foreground-color);
   background-color: var(--button-secondary-disabled-background-color);
+}
+
+.button_variant_secondary:where(.button_danger) {
+  color: inherit;
 }
 
 /* || INLINE */
 .button_variant_inline {
   background-color: transparent;
   color: inherit;
-}
-
-.button_variant_inline.button_danger {
-  background-color: transparent;
-  color: var(--button-danger-foreground-color);
 }
 
 .button_variant_inline:hover {
@@ -259,20 +245,20 @@
   background-color: var(--button-inline-active-background-color);
 }
 
-.button_disabled.button_variant_inline {
+.button_variant_inline:where(.button_disabled) {
   color: var(--button-inline-disabled-background-color);
   background-color: transparent;
+}
+
+.button_variant_inline:where(.button_danger) {
+  background-color: transparent;
+  color: var(--button-danger-foreground-color);
 }
 
 /* || LINK */
 .button_variant_link {
   background-color: transparent;
   color: var(--button-link-foreground-color);
-}
-
-.button_variant_link.button_danger {
-  background-color: transparent;
-  color: var(--button-danger-foreground-color);
 }
 
 .button_variant_link:hover {
@@ -283,8 +269,13 @@
   color: var(--button-link-active-foreground-color);
 }
 
-.button_disabled.button_variant_link {
+.button_variant_link:where(.button_disabled) {
   color: var(--button-link-disabled-foreground-color);
+}
+
+.button_variant_link:where(.button_danger) {
+  background-color: transparent;
+  color: var(--button-danger-foreground-color);
 }
 
 /* || GHOST */
@@ -292,22 +283,6 @@
   background-color: var(--button-ghost-background-color);
   color: var(--button-ghost-foreground-color);
   border: 0.063rem solid var(--button-ghost-foreground-color);
-}
-
-.button_variant_ghost.button_danger {
-  background-color: var(--button-ghost-background-color);
-  color: var(--button-danger-foreground-color);
-  border: 0.063rem solid var(--button-danger-background-color);
-}
-
-.button_variant_ghost.button_danger:hover {
-  color: var(--button-danger-hover-background-color);
-  border: 0.063rem solid var(--button-danger-hover-background-color);
-}
-
-.button_variant_ghost.button_danger:active {
-  color: var(--button-danger-active-background-color);
-  border: 0.063rem solid var(--button-danger-active-background-color);
 }
 
 .button_variant_ghost:hover {
@@ -320,17 +295,42 @@
   border-color: var(--button-ghost-active-foreground-color);
 }
 
-.button_disabled.button_variant_ghost {
+.button_variant_ghost:where(.button_disabled) {
   color: var(--button-ghost-disabled-foreground-color);
   border-color: var(--button-ghost-disabled-foreground-color);
 }
 
+.button_variant_ghost:where(.button_danger) {
+  background-color: var(--button-ghost-background-color);
+  color: var(--button-danger-foreground-color);
+  border: 0.063rem solid var(--button-danger-background-color);
+}
+
+.button_variant_ghost:where(.button_danger:hover) {
+  color: var(--button-danger-hover-background-color);
+  border: 0.063rem solid var(--button-danger-hover-background-color);
+}
+
+.button_variant_ghost:where(.button_danger:active) {
+  color: var(--button-danger-active-background-color);
+  border: 0.063rem solid var(--button-danger-active-background-color);
+}
+
 /* || DANGER */
-.button_danger {
+.button_danger:not(
+    :where(.button_variant_inline, .button_variant_link, .button_variant_ghost)
+  ) {
   background-color: var(--button-danger-background-color);
 }
 
-.button_danger:hover,
-.button_danger:active {
+.button_danger:is(:hover, :active):not(
+    :where(.button_variant_inline, .button_variant_link, .button_variant_ghost)
+  ) {
+  background-color: var(--button-danger-hover-background-color);
+}
+
+.button_danger:where(.button_disabled):not(
+    :where(.button_variant_inline, .button_variant_link, .button_variant_ghost)
+  ) {
   background-color: var(--button-danger-hover-background-color);
 }

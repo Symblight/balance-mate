@@ -11,7 +11,7 @@
   --input-background-color: var(--color-white);
   --input-disabled-foreground-color: var(--color-gray);
 
-  --input-border-color: var(--border-separator-color);
+  --input-border-color: transparent;
   --input-control-size: var(--input-size-m);
   width: 100%;
 }
