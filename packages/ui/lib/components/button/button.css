@@ -4,8 +4,6 @@
   width: auto;
   cursor: pointer;
 
-  font-family: inherit;
-
   --button-foreground-color: var(--global-foreground);
 
   --button-inline-hover-background-color: var(--color-opac-b-2);
@@ -52,6 +50,8 @@
 .button {
   display: inline-flex;
   position: relative;
+
+  font-family: inherit;
 
   justify-content: center;
   align-items: center;
