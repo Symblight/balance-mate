@@ -1,18 +1,8 @@
-@-webkit-keyframes slide-in-up {
-  0% {
-      transform: translateY(100%)
-  }
-}
+
 
 @keyframes slide-in-up {
   0% {
       transform: translateY(100%)
-  }
-}
-
-@-webkit-keyframes scale-down {
-  to {
-      transform: scale(.75)
   }
 }
 

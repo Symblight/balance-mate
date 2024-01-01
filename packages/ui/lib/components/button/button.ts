@@ -51,6 +51,9 @@ export default class PvButton extends LitElement {
   @property({ type: String, attribute: true })
   size: ButtonSize = "m";
 
+  @property()
+  type: HTMLButtonElement['type'] = "button";
+
   @property({ type: Boolean, attribute: true })
   danger: boolean = false;
 
@@ -168,8 +171,8 @@ export default class PvButton extends LitElement {
       </a>`;
     }
     return html`<button
-      type="button"
       part="button"
+      type=${this.type}
       class="button ${this.classes}"
       ?disabled=${this.disabled}
       aria-busy=${this.loading}

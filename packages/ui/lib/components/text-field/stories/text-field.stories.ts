@@ -93,11 +93,24 @@ export const Invalid: Story = {
     invalid: true,
     valid: false,
   },
-  render: ({ invalid }) =>
-    html`<label for="text-field">Username</label
-      ><pv-text-field id="text-field" ?invalid=${invalid}>
+  render: ({ invalid, valid }) => {
+    function handleSubmit(e: Event) {;
+      e.preventDefault();
+      console.log(e);
+    }
+
+    return html`<form @submit=${handleSubmit}>
+      <label for="text-field">Username</label
+      ><pv-text-field id="text-field" name="username" ?invalid=${invalid} ?valid=${valid}>
         <span slot="help-text"
           >This field is required. Please be "Positive"</span
         >
-      </pv-text-field>`,
+      </pv-text-field>
+      <label for="text-field">Email</label
+      ><pv-text-field type="email" id="email" name="email" ?invalid=${invalid} ?valid=${valid}>
+        <span slot="help-text">This field is required</span>
+      </pv-text-field>
+      <pv-button type="submit">Submit</pv-button>
+    </form> `;
+  },
 };

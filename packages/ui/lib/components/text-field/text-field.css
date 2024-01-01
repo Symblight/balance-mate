@@ -33,6 +33,7 @@
   transition: all var(--transition-duration) ease-out;
   background-color: var(--text-field-background-color);
   border-radius: var(--border-radius-base);
+  z-index: 1;
 }
 
 .text-field:where(:focus, :active, :hover) {
@@ -136,16 +137,12 @@
 }
 
 /* || STATUS */
-.text-field_status_error {
-  --text-field-border-color: var(--text-field-invalid-color);
+.text-field__validation-icon_invalid {
+  color: var(--text-field-invalid-color);
 }
 
-.text-field_status_error:where(.text-field:hover) {
-  --text-field-border-color: var(--text-field-invalid-color);
-}
-
-.text-field_status_success:where(.text-field:hover) {
-  --text-field-border-color: var(--text-field-valid-color);
+.text-field__validation-icon_valid {
+  color: var(--text-field-valid-color);
 }
 
 .text-field__help-text {
@@ -157,8 +154,32 @@
   letter-spacing: 0.03333em;
   text-align: left;
   margin: 2px 4px 0px;
+
+  transform: translateY(-100%);
+  z-index: 0;
+  block-size: 0;
+  overflow: hidden;
+}
+
+.text-field__help-text_visible {
+  animation: scale-down 0.1s 50ms forwards;
+  animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
+  block-size: auto;
 }
 
 .text-field__help-text_invalid {
   color: var(--text-field-invalid-color);
+}
+
+.text-field__help-text_valid {
+  color: var(--text-field-foreground-color);
+}
+
+@keyframes scale-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
 }

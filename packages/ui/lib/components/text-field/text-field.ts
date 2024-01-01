@@ -8,10 +8,17 @@ import {
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
+import { when } from "lit/directives/when.js";
+
+import { generateUniqueKey } from "../../shared/gen-id.ts";
+
+import "../icon/icon.ts";
 
 import styles from "./text-field.css?inline";
 
 export type TextFieldSize = "xs" | "s" | "m" | "l";
+
+const textFieldGeneratorKeys = generateUniqueKey("text-field-");
 
 /**
  * @tag pv-text-field
@@ -55,6 +62,9 @@ export default class PvTextField extends LitElement {
 
   @state()
   private _isFocusVisible: boolean = false;
+
+  @state()
+  private ariaId = `${textFieldGeneratorKeys.next().value}-${this.id}`;
 
   @property({ type: Boolean, attribute: true, reflect: true })
   disabled = false;
@@ -128,10 +138,22 @@ export default class PvTextField extends LitElement {
   }
 
   private renderSuffix() {
-    if (!this.suffixSlot) return nothing;
+    if (!this.suffixSlot && !this.invalid && !this.valid) return nothing;
     return html` <div class="text-field__affix_space_right">
       <div class="text-field__affix">
-        <slot name="suffix"></slot>
+        <slot name="suffix">
+          ${when(
+            this.invalid || this.valid,
+            () =>
+              html`<pv-icon
+                name=${this.valid ? "check" : "alert"}
+                class=${classMap({
+                  "text-field__validation-icon_valid": this.valid,
+                  "text-field__validation-icon_invalid": this.invalid,
+                })}
+              ></pv-icon>`,
+          )}
+        </slot>
       </div>
     </div>`;
   }
@@ -154,6 +176,8 @@ export default class PvTextField extends LitElement {
   }
 
   render() {
+    const hasValidation = this.invalid || this.valid;
+    const ariaId = hasValidation && this.ariaId;
     return html`<div
         part="box"
         class="text-field ${classMap({
@@ -177,6 +201,8 @@ export default class PvTextField extends LitElement {
           @input=${this.handleChange}
           @focus=${this.handleFocus}
           @blur=${this.handleBlur}
+          aria-describedby=${ariaId}
+          aria-invalid=${this.invalid}
           class="text-field__control ${classMap({
             "text-field__control_disabled": this.disabled,
             ...this.textFieldSpaceClass,
@@ -187,8 +213,11 @@ export default class PvTextField extends LitElement {
       </div>
       <div
         class="text-field__help-text ${classMap({
+          "text-field__help-text_visible": hasValidation,
           "text-field__help-text_invalid": this.invalid,
+          "text-field__help-text_valid": this.valid,
         })}"
+        id=${ariaId}
       >
         <slot name="help-text"></slot>
       </div>`;

@@ -1,4 +1,10 @@
-import { CSSResultGroup, CSSResultOrNative, LitElement, html } from "lit";
+import {
+  CSSResultGroup,
+  CSSResultOrNative,
+  LitElement,
+  PropertyValueMap,
+  html,
+} from "lit";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
 import { customElement, property } from "lit/decorators.js";
 
@@ -32,6 +38,15 @@ export default class PvIcon extends LitElement {
 
   static get styles(): CSSResultGroup {
     return [styles as unknown as CSSResultOrNative];
+  }
+
+  protected override update(
+    changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>,
+  ): void {
+    if (changedProperties.has('name') && changedProperties.get('name') !== this.name) {
+      this.getIcon(this.name);
+    }
+    super.update(changedProperties);
   }
 
   render() {
