@@ -17,4 +17,6 @@
 
   --shadow-elevation: 0 2px 6px var(--color-opac-b-2),
   0 0 4px var(--color-opac-b-1);
+
+  --border-color: var(--color-opac-b-3);
 }

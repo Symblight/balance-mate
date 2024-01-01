@@ -1,0 +1,185 @@
+:host {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+
+  --text-field-size-l: 34px;
+  --text-field-size-m: 28px;
+  --text-field-size-s: 26px;
+  --text-field-size-xs: 24px;
+
+  --text-field-foreground-color: var(--global-foreground);
+  --text-field-outline-color: var(--color-primary);
+
+  --text-field-disabled-foreground-color: var(--color-opac-b-5);
+  --text-field-disabled-background-color: var(--color-light-gray);
+
+  --text-field-background-color: var(--color-white);
+
+  --text-field-border-color: var(--border-color);
+  --text-field-control-size: var(--text-field-size-m);
+
+  --text-field-invalid-color: var(--color-danger);
+  --text-field-valid-color: var(--color-success);
+}
+
+.text-field {
+  display: flex;
+  border: 0.12rem solid var(--text-field-border-color);
+  text-align: inherit;
+
+  outline: none;
+  transition: all var(--transition-duration) ease-out;
+  background-color: var(--text-field-background-color);
+  border-radius: var(--border-radius-base);
+  z-index: 1;
+}
+
+.text-field:where(:focus, :active, :hover) {
+  --text-field-border-color: var(--text-field-outline-color);
+}
+
+.text-field:focus-assertin {
+  --text-field-background-color: var(--text-field-background-color);
+}
+
+.text-field_disabled {
+  color: var(--text-field-disabled-foreground-color);
+  cursor: not-allowed;
+  --text-field-background-color: var(--text-field-disabled-background-color);
+  --text-field-border-color: transparent;
+}
+
+.text-field_focused {
+  --text-field-border-color: var(--text-field-outline-color);
+}
+
+/* || SIZE */
+.text-field__control_size_l {
+  --text-field-control-size: var(--text-field-size-l);
+  font-size: 1rem;
+  padding: 0rem 1rem;
+}
+
+.text-field__control_size_m {
+  --text-field-control-size: var(--text-field-size-m);
+  padding: 0rem 1rem;
+}
+
+.text-field__control_size_s {
+  --text-field-control-size: var(--text-field-size-s);
+  font-size: 0.7rem;
+  padding: 0rem 0.9rem;
+}
+
+.text-field__control_size_xs {
+  --text-field-control-size: var(--text-field-size-xs);
+  font-size: 0.65rem;
+  padding: 0rem 0.75rem;
+}
+
+/* || CONTROL */
+.text-field__control {
+  text-align: inherit;
+  width: 100%;
+  outline: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--text-field-foreground-color);
+  height: var(--text-field-control-size);
+}
+
+.text-field__control_disabled {
+  color: var(--text-field-disabled-foreground-color);
+  cursor: not-allowed;
+}
+
+.text-field__control:placeholder {
+  color: var(--color-gray);
+}
+
+.text-field__control:where(.text-field__control_space_r) {
+  padding-inline-start: 0;
+}
+
+.text-field__control:where(.text-field__control_space_l) {
+  padding-inline-end: 0;
+}
+
+.text-field__control[readonly] {
+  cursor: pointer;
+}
+
+/* || AFFIX */
+.text-field__affix_space_left {
+  inset-inline-start: 0;
+}
+
+.text-field__affix_space_right {
+  inset-inline-end: 0;
+}
+
+.text-field__affix {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 2rem;
+}
+
+.text-field__icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 2rem;
+}
+
+/* || STATUS */
+.text-field__validation-icon_invalid {
+  color: var(--text-field-invalid-color);
+}
+
+.text-field__validation-icon_valid {
+  color: var(--text-field-valid-color);
+}
+
+.text-field__help-text {
+  display: flex;
+  flex-wrap: nowrap;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 1.66;
+  letter-spacing: 0.03333em;
+  text-align: left;
+  margin: 2px 4px 0px;
+
+  transform: translateY(-100%);
+  z-index: 0;
+  block-size: 0;
+  overflow: hidden;
+}
+
+.text-field__help-text_visible {
+  animation: scale-down 0.1s 50ms forwards;
+  animation-timing-function: cubic-bezier(0.5, -0.5, 0.1, 1.5);
+  block-size: auto;
+}
+
+.text-field__help-text_invalid {
+  color: var(--text-field-invalid-color);
+}
+
+.text-field__help-text_valid {
+  color: var(--text-field-foreground-color);
+}
+
+@keyframes scale-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}

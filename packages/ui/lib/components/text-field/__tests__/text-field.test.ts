@@ -1,12 +1,12 @@
 import { assert } from "@open-wc/testing";
 
-import PvInput from "../input.ts";
+import PvInput from "../text-field.ts";
 
 // import type PvButtonProps from '../button';
 
-describe("pv-input", () => {
+describe("pv-text-field", () => {
   it("is defined", () => {
-    const el = document.createElement("pv-input");
+    const el = document.createElement("pv-text-field");
 
     assert.instanceOf(el, PvInput);
   });
