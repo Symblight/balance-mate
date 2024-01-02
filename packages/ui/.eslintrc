@@ -24,6 +24,7 @@
     "no-unused-vars": "off",
     "lit/no-legacy-template-syntax": "error",
     "lit/no-template-arrow": "warn",
-    "import/no-unresolved": ["error", { "ignore": ["\\.css\\?inline$"] }]
+    "import/no-unresolved": ["error", { "ignore": ["\\.css\\?inline$"] }],
+    "import/no-extraneous-dependencies": "off"
   }
 }

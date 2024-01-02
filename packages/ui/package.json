@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "@lit-labs/observers": "^2.0.2",
+    "@open-wc/form-control": "^1.0.0",
+    "@open-wc/form-helpers": "^1.0.0",
     "@open-wc/testing": "^4.0.0",
     "lit": "^3.1.0",
     "svgo": "^3.1.0"
