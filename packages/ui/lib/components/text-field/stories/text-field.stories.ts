@@ -96,7 +96,8 @@ export const Invalid: Story = {
   render: ({ invalid, valid }) => {
     function handleSubmit(e: Event) {;
       e.preventDefault();
-      console.log(e);
+      const formData = new FormData(e.target as HTMLFormElement);
+      console.log(formData);
     }
 
     return html`<form @submit=${handleSubmit}>

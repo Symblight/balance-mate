@@ -6,14 +6,15 @@ on:
     types:
       - opened
       - edited
-      - synchronize
       - reopened
+      - synchronize
       - ready_for_review
 
 jobs:
   build:
     name: Lint, Tests
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || !github.event.pull_request.draft }}
     strategy:
       matrix:
         node-version: [20.x]

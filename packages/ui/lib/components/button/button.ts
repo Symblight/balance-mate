@@ -3,6 +3,7 @@ import { MutationController } from "@lit-labs/observers/mutation-controller.js";
 import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { when } from "lit/directives/when.js";
+import { submit } from "@open-wc/form-helpers";
 
 import "../spin/spin.ts";
 
@@ -45,6 +46,9 @@ export default class PvButton extends LitElement {
     };
   }
 
+  @property({ type: String })
+  form: HTMLFormElement | string;
+
   @property()
   variant: ButtonVariant = "primary";
 
@@ -52,7 +56,7 @@ export default class PvButton extends LitElement {
   size: ButtonSize = "m";
 
   @property()
-  type: HTMLButtonElement['type'] = "button";
+  type: HTMLButtonElement["type"] = "button";
 
   @property({ type: Boolean, attribute: true })
   danger: boolean = false;
@@ -79,6 +83,24 @@ export default class PvButton extends LitElement {
     return [styles as unknown as CSSResultOrNative];
   }
 
+  private handleClick() {
+    if (this.type === "submit") {
+      let targetForm: HTMLFormElement;
+
+      if (this.form instanceof HTMLFormElement) {
+        targetForm = this.form;
+      } else if (typeof this.form === "string") {
+        targetForm = document.getElementById(this.form) as HTMLFormElement;
+      } else {
+        targetForm = this.closest("form") as HTMLFormElement;
+      }
+
+      if (targetForm) {
+        submit(targetForm);
+      }
+    }
+  }
+
   get assignedNodesList() {
     const slotSelector = "slot:not([name])";
     const slotEl = this.renderRoot?.querySelector(slotSelector);
@@ -97,11 +119,12 @@ export default class PvButton extends LitElement {
   }
 
   updateChildren() {
-    const iconSlot = this.shadowRoot?.querySelector('slot[name="icon"]') as HTMLSlotElement;
+    const iconSlot = this.shadowRoot?.querySelector(
+      'slot[name="icon"]',
+    ) as HTMLSlotElement;
     const icon = !iconSlot
       ? []
-      :
-        iconSlot.assignedElements().map((element) => {
+      : iconSlot.assignedElements().map((element) => {
           const newElement = element.cloneNode(true) as HTMLElement;
           newElement.removeAttribute("slot");
           return newElement;
@@ -176,6 +199,7 @@ export default class PvButton extends LitElement {
       class="button ${this.classes}"
       ?disabled=${this.disabled}
       aria-busy=${this.loading}
+      @click=${this.handleClick}
     >
       ${this.renderChildrenContent()}
     </button>`;

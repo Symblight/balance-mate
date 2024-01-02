@@ -9,6 +9,7 @@ import { customElement, property, state } from "lit/decorators.js";
 import { classMap } from "lit/directives/class-map.js";
 import { live } from "lit/directives/live.js";
 import { when } from "lit/directives/when.js";
+import { FormControlMixin } from "@open-wc/form-control";
 
 import { generateUniqueKey } from "../../shared/gen-id.ts";
 
@@ -26,7 +27,7 @@ const textFieldGeneratorKeys = generateUniqueKey("text-field-");
  */
 
 @customElement("pv-text-field")
-export default class PvTextField extends LitElement {
+export default class PvTextField extends FormControlMixin(LitElement) {
   private prefixSlot: boolean;
 
   private suffixSlot: boolean;
@@ -86,7 +87,8 @@ export default class PvTextField extends LitElement {
 
   private handleChange(event: InputEvent) {
     if (this.disabled) return;
-    this.value = ((event.target as HTMLInputElement) || null)?.value;
+    this.value = ((event.target as HTMLInputElement) || null)?.value;;
+    this.setValue(this.value);
     this.dispatchEvent(new Event("change"));
   }
 
