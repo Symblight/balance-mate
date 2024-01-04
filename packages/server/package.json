@@ -8,7 +8,13 @@
     "start": "node ./dist/main.js",
     "dev": "DEBUG=fin-api:* nodemon --config .nodemonrc ./src/main.ts",
     "lint": "eslint --ext .ts . --ignore-path .gitignore",
-    "format": "prettier \"**/*.ts\" --write --ignore-path .gitignore"
+    "format": "prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "migrate:make": "knex migrate:make --knexfile ./tools/knexfile.ts",
+    "migrate:latest": "knex migrate:latest --knexfile ./tools/knexfile.ts",
+    "migrate:rollback": "knex migrate:rollback --knexfile ./tools/knexfile.ts",
+    "migrate:up": "knex migrate:up --knexfile ./tools/knexfile.ts",
+    "migrate:down": "knex migrate:down --knexfile ./tools/knexfile.ts",
+    "migrate:list": "knex migrate:list --knexfile ./tools/knexfile.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,12 +26,15 @@
     "debug": "^4.3.4",
     "fastify": "^4.25.2",
     "fastify-plugin": "^4.5.1",
+    "knex": "^3.1.0",
+    "pg": "^8.11.3",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
     "@types/config": "^3.3.3",
     "@types/debug": "^4.1.12",
     "@types/node": "^20.10.4",
+    "@types/pg": "^8.10.9",
     "@typescript-eslint/parser": "^6.16.0",
     "nodemon": "^3.0.2",
     "ts-node": "^10.9.2"
