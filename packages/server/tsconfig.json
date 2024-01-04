@@ -6,7 +6,7 @@
     "moduleResolution": "NodeNext",
     "strict": false,
     "sourceMap": true,
-    "rootDir": "./src"
+    "rootDir": "."
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tools/*"]
 }

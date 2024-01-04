@@ -16,6 +16,7 @@ app.register(appPlugins);
 const start = () => {
   try {
     app.listen({ port: Number(port) });
+    console.log(process.env.NODE_ENV)
     debug("start");
   } catch (err) {
     app.log.error(err);
