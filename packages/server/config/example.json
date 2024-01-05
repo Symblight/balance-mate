@@ -1,13 +1,19 @@
 {
-    "port": 3100,
-    "database": {
-      "pg": {
-        "PG_HOST": "localhost",
-        "PG_PORT": "5432",
-        "PG_USER": "",
-        "PG_PASSWORD": "",
-        "PG_DB_NAME": ""
-      }
+  "port": 3100,
+  "HOST": "localhost",
+  "database": {
+    "pg": {
+      "PG_HOST": "localhost",
+      "PG_PORT": "5432",
+      "PG_USER": "",
+      "PG_PASSWORD": "",
+      "PG_DB_NAME": ""
     }
-  }
-  
+  },
+  "auth0": {
+    "CLIENT_SECRET": "",
+    "CLIENT_ID": "",
+    "CLIENT_ISSUER": ""
+  },
+  "COOKIE_SECRET": "your-secret-key"
+}

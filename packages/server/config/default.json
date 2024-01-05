@@ -1,5 +1,6 @@
 {
   "port": 3100,
+  "HOST": "localhost",
   "database": {
     "pg": {
       "PG_HOST": "localhost",
