@@ -1,17 +1,15 @@
-import path from "node:path";
 import { FastifyInstance } from "fastify";
-import staticPlugin from "@fastify/static"
+
+import { auth0Plugin } from "./auth0-plugin";
+import frontendContext from "./frontend-plugin";
 
 import routes from "../routes/routes";
-
-const staticPath = path.join(__dirname, "../../public");
 
 export default async function appPlugins(fastify: FastifyInstance) {
   // Register the plugins
 
+  fastify.register(auth0Plugin);
   fastify.register(routes, { prefix: "/api/" });
 
-  fastify.register(staticPlugin, {
-    root: staticPath,
-  });
+  fastify.register(frontendContext);
 }

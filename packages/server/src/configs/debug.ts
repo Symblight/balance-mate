@@ -1,3 +1,3 @@
 import createDebug from "debug";
 
-export default (name: string) => createDebug("fin-api").extend(name);
+export default (name: string) => createDebug("balance-api").extend(name);
