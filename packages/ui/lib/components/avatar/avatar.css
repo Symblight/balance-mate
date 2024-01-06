@@ -1,0 +1,27 @@
+:host {
+  width: auto;
+  height: auto;
+  display: inline-flex;
+}
+
+.avatar {
+  text-align: inherit;
+  vertical-align: bottom;
+  overflow: hidden;
+  user-select: none;
+  --avatar-stroke-color: var(--color-opac-w-4);
+}
+
+.avatar__image {
+  overflow: hidden;
+}
+
+.avatar__rect {
+  stroke-width: 0.125rem;
+  stroke: var(--avatar-stroke-color);
+}
+
+.avatar__circle {
+  stroke-width: 0.125rem;
+  stroke: var(--avatar-stroke-color);
+}

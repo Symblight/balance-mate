@@ -82,6 +82,7 @@
 /* || CONTROL */
 .text-field__control {
   text-align: inherit;
+  font-family: inherit;
   width: 100%;
   outline: 0;
   border: none;
