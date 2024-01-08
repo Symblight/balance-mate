@@ -2,7 +2,7 @@
 
 - [x] Button
 - [x] Input
-- [ ] Modal
+- [x] Modal
 - [ ] Checkbox
-- [ ] Spin
-- [ ] Icons
+- [x] Spin
+- [x] Icons

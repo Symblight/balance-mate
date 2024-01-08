@@ -46,36 +46,70 @@ export default class PvButton extends LitElement {
     };
   }
 
+  /**
+   * The form associated with the button.
+   * Type: String or HTMLFormElement
+   */
   @property({ type: String })
   form: HTMLFormElement | string;
 
+  /**
+   * The variant style of the button.
+   */
   @property()
   variant: ButtonVariant = "primary";
 
+  /**
+   * The size of the button.
+   */
   @property({ type: String, attribute: true })
   size: ButtonSize = "m";
 
+  /**
+   * The type of the button.
+   */
   @property()
   type: HTMLButtonElement["type"] = "button";
 
+  /**
+   * Indicates a danger state for the button.
+   */
   @property({ type: Boolean, attribute: true })
   danger: boolean = false;
 
+  /**
+   * Indicates a loading state for the button.
+   */
   @property({ type: Boolean, attribute: true })
   loading: boolean = false;
 
+  /**
+   * The href link for the button.
+   */
   @property({ type: String, attribute: true })
   href: boolean = false;
 
+  /**
+   * Indicates whether the button is disabled.
+   */
   @property({ type: Boolean, attribute: true })
   disabled: boolean = false;
 
+  /**
+   * Indicates whether the button should have rounded corners.
+   */
   @property({ type: Boolean, attribute: true })
   rounded: boolean = false;
 
+  /**
+   * Tracks whether the button slot has content.
+   */
   @state()
   slotHasContent = false;
 
+  /**
+   * The icon associated with the button.
+   */
   @state()
   icon: Node | null = null;
 

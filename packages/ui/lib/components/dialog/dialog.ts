@@ -23,20 +23,38 @@ export default class PvDialog extends LitElement {
     return [styles as unknown as CSSResultOrNative];
   }
 
+  /**
+   * The state indicating whether the dialog is open.
+   */
   @property({ type: Boolean, state: true })
   private isOpen: boolean = false;
 
+  /**
+   * The state indicating whether the dialog is in the process of opening.
+   */
   @property({ type: Boolean, state: true })
   private isOpening: boolean = false;
 
+  /**
+   * The title for the dialog header.
+   */
   @property()
   headerTitle = "";
 
+  /**
+   * The type associated with the dialog.
+   */
   @property()
   type = nothing;
 
+  /**
+   * Reference to the dialog element.
+   */
   @query("dialog") dialog: HTMLDialogElement;
 
+  /**
+   * Property that reflects the open state of the dialog.
+   */
   @property({ type: Boolean, attribute: true, reflect: true })
   get open() {
     return this.isOpen;
@@ -103,7 +121,7 @@ export default class PvDialog extends LitElement {
         <div>
           <h3 class="dialog__title">${this.headerTitle}</h3>
           <div class="dialog__button-close">
-            <pv-button  variant="inline" size="m" @click=${this.close}>
+            <pv-button variant="inline" size="m" @click=${this.close}>
               <pv-icon slot="icon" name="close"></pv-icon>
             </pv-button>
           </div>

@@ -1,14 +1,12 @@
-
-
 @keyframes slide-in-up {
   0% {
-      transform: translateY(100%)
+    transform: translateY(100%);
   }
 }
 
 @keyframes scale-down {
   to {
-      transform: scale(.75)
+    transform: scale(0.75);
   }
 }
 
@@ -16,10 +14,9 @@
   z-index: 1;
 }
 
-
 @media (prefers-reduced-motion: no-preference) {
   .dialog[open] {
-      animation: slide-in-up .2s cubic-bezier(.25,0,.3,1); forwards
+    animation: slide-in-up 0.2s cubic-bezier(0.25, 0, 0.3, 1) forwards;
   }
 }
 
@@ -32,8 +29,8 @@
 
 @media (prefers-reduced-motion: no-preference) and @media (max-width: 768px) {
   .dialog[modal-mode="mega"] {
-    animation: slide-out-down .2s cubic-bezier(.25,0,.3,1) forwards;
-    animation-timing-function: cubic-bezier(.5,-.3,.1,1.5);
+    animation: slide-out-down 0.2s cubic-bezier(0.25, 0, 0.3, 1) forwards;
+    animation-timing-function: cubic-bezier(0.5, -0.3, 0.1, 1.5);
   }
 }
 
@@ -49,7 +46,6 @@
 .dialog::backdrop {
   transition: backdrop-filter 0.4s ease;
 }
-
 
 .dialog {
   margin: auto;
@@ -101,7 +97,6 @@
 .dialog__footer {
   flex: 1 auto;
 }
-
 
 @media (max-width: 768px) {
   dialog[modal-mode="mega"] {
