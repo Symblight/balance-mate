@@ -1,10 +1,23 @@
-@charset 'utf-8';
-
-@import "themes/dark.css";
-@import "themes/light.css";
+@charset "utf-8";
 
 /* SETTINGS */
 @import "settings/colors.css";
 @import "settings/text.css";
 @import "settings/animations.css";
 @import "settings/variables.css";
+
+:root {
+  /* || GENERAL STYLES */
+  --global-foreground: var(--pv-color-black);
+
+  --pv-color-gray-1: var(--pv-color-opac-b-1);
+  --pv-color-gray-2: var(--pv-color-opac-b-2);
+  --pv-color-gray-3: var(--pv-color-opac-b-3);
+  --pv-color-gray-4: var(--pv-color-opac-b-4);
+  --pv-color-gray-5: var(--pv-color-opac-b-5);
+  --pv-color-gray-6: var(--pv-color-opac-b-6);
+  --pv-color-gray-7: var(--pv-color-opac-b-7);
+  --pv-color-gray-8: var(--pv-color-opac-b-8);
+  --pv-color-gray-9: var(--pv-color-opac-b-9);
+  --pv-color-gray-10: var(--pv-color-opac-b-10);
+}

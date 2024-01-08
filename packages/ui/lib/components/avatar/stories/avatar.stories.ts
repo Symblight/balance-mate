@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { Meta, StoryObj } from "@storybook/web-components";
 
-import "../../../styles/theme.css";
+// import "../../../styles/theme.css";
 import "../avatar.ts";
 
 import type PvAvatarProps from "../avatar.ts";

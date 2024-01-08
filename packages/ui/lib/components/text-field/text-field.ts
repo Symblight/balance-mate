@@ -43,21 +43,39 @@ export default class PvTextField extends FormControlMixin(LitElement) {
     return [styles as unknown as CSSResultOrNative];
   }
 
+  /**
+   * The name associated with the text field.
+   */
   @property({ type: String, attribute: true })
   name = "";
 
+  /**
+   * Indicates an invalid state.
+   */
   @property({ type: Boolean, attribute: true, reflect: true })
   invalid = false;
 
+  /**
+   * Indicates a valid state.
+   */
   @property({ type: Boolean, attribute: true, reflect: true })
   valid = false;
 
+  /**
+   * Indicates a required state.
+   */
   @property({ type: Boolean, attribute: true, reflect: true })
   required = false;
 
+  /**
+   * The placeholder text for the text field.
+   */
   @property({ type: String, attribute: true })
   placeholder = "";
 
+  /**
+   * Indicates an active state (private).
+   */
   @property({ type: Boolean, attribute: true })
   private active = false;
 
@@ -67,15 +85,27 @@ export default class PvTextField extends FormControlMixin(LitElement) {
   @state()
   private ariaId = `${textFieldGeneratorKeys.next().value}-${this.id}`;
 
+  /**
+   * Indicates whether the text field is disabled or not.
+   */
   @property({ type: Boolean, attribute: true, reflect: true })
   disabled = false;
 
+  /**
+   * Specifies the size of the text field. Default value is "m".
+   */
   @property({ type: String, attribute: true })
   size: TextFieldSize = "m";
 
+  /**
+   * Indicates whether the text field is read-only or not. Default is false.
+   */
   @property({ type: Boolean, attribute: true, reflect: true })
   readOnly = false;
 
+  /**
+   * Specifies the type of the text field. Default value is "text".
+   */
   @property()
   type: HTMLInputElement["type"] = "text";
 
@@ -87,7 +117,7 @@ export default class PvTextField extends FormControlMixin(LitElement) {
 
   private handleChange(event: InputEvent) {
     if (this.disabled) return;
-    this.value = ((event.target as HTMLInputElement) || null)?.value;;
+    this.value = ((event.target as HTMLInputElement) || null)?.value;
     this.setValue(this.value);
     this.dispatchEvent(new Event("change"));
   }

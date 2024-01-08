@@ -1,7 +1,17 @@
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    /* || GENERAL STYLES */
-    --global-foreground: var(--color-white);
-  }
+:root {
+  color-scheme: dark;
+  --theme: dark;
+  /* || GENERAL STYLES */
+  --global-foreground: var(--pv-color-white);
+
+  --pv-color-gray-1: var(--pv-color-opac-w-1);
+  --pv-color-gray-2: var(--pv-color-opac-w-2);
+  --pv-color-gray-3: var(--pv-color-opac-w-3);
+  --pv-color-gray-4: var(--pv-color-opac-w-4);
+  --pv-color-gray-5: var(--pv-color-opac-w-5);
+  --pv-color-gray-6: var(--pv-color-opac-w-6);
+  --pv-color-gray-7: var(--pv-color-opac-w-7);
+  --pv-color-gray-8: var(--pv-color-opac-w-8);
+  --pv-color-gray-9: var(--pv-color-opac-w-9);
+  --pv-color-gray-10: var(--pv-color-opac-w-10);
 }

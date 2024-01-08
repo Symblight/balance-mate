@@ -18,7 +18,7 @@
     "package": "npm run build",
     "prepublishOnly": "npm run package",
     "lint": "eslint --ext .ts . --ignore-path .gitignore",
-    "format": "prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "format": "prettier --write . --ignore-path .gitignore",
     "test:runner": "web-test-runner --coverage",
     "test:dev": "web-test-runner --coverage --dev",
     "test:component": "npm run test -- --group",
@@ -80,7 +80,9 @@
         "types": "./dist/components/index.d.ts"
       }
     },
-    "./theme/theme.css": "./dist/theme.css"
+    "./theme/theme.css": "./dist/theme.css",
+    "./theme/dark.css": "./dist/themes/dark.css",
+    "./theme/light.css": "./dist/themes/light.css"
   },
   "wireit": {
     "build-ts": {

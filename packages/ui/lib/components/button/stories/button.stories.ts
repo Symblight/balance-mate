@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/web-components";
 import { html } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
-import "../../../styles/theme.css";
+// import "../../../styles/theme.css";
 import "../button.ts";
 import "../../icon/icon.ts";
 
@@ -80,7 +80,10 @@ export const Regular: Story = {
 
 export const WithIcon: Story = {
   args: {
-    children: html` <pv-icon slot="icon" name="close"></pv-icon>` as unknown as HTMLCollection,
+    children: html` <pv-icon
+      slot="icon"
+      name="close"
+    ></pv-icon>` as unknown as HTMLCollection,
     variant: "inline",
   },
 };

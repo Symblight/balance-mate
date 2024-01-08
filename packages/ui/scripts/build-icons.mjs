@@ -5,9 +5,7 @@ import { fileURLToPath } from "node:url";
 import { optimize } from "svgo";
 import esbuild from "esbuild";
 
-const renderTemplate = ({ svgCode, name }) => {
-  return `'${name}': '${svgCode}'`;
-};
+const renderTemplate = ({ svgCode, name }) => `'${name}': '${svgCode}'`;
 
 const getIconFileData = async (iconFolder, file) => {
   const content = await fs.readFile(path.join(iconFolder, file), "utf8");
@@ -54,7 +52,7 @@ const getIconFileData = async (iconFolder, file) => {
 };
 
 const getIconsCode = async (iconFolder) => {
-  let store = "export const iconsLibrary: Record<string, string> = {";
+  const store = "export const iconsLibrary: Record<string, string> = {";
   const files = await fs.readdir(iconFolder);
 
   const icons = files.map((file) => {
@@ -65,9 +63,7 @@ const getIconsCode = async (iconFolder) => {
   });
   const body = await Promise.all(icons);
   return (
-    body.reduce((acc, item) => {
-      return (acc += "\n" + item + ",");
-    }, store) + "\n}"
+    `${body.reduce((acc, item) => (acc += `\n${  item  },`), store)  }\n}`
   );
 };
 
