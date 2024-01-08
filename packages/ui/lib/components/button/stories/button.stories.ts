@@ -80,7 +80,10 @@ export const Regular: Story = {
 
 export const WithIcon: Story = {
   args: {
-    children: html` <pv-icon slot="icon" name="close"></pv-icon>` as unknown as HTMLCollection,
+    children: html` <pv-icon
+      slot="icon"
+      name="close"
+    ></pv-icon>` as unknown as HTMLCollection,
     variant: "inline",
   },
 };

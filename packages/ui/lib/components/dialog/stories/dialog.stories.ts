@@ -4,7 +4,7 @@ import { Meta, StoryObj } from "@storybook/web-components";
 import "../../../styles/theme.css";
 import "../dialog.ts";
 import "../../button/button.ts";
-import "../../text-field/text-field.ts"
+import "../../text-field/text-field.ts";
 
 import type PvDialogProps from "../dialog.ts";
 

@@ -10,7 +10,7 @@ import { iconsLibrary } from "../../../icons/index.ts";
 
 function Template() {
   return html` ${Object.keys(iconsLibrary).map(
-    (name) => html`<pv-icon name=${name}></pv-icon> `
+    (name) => html`<pv-icon name=${name}></pv-icon> `,
   )}`;
 }
 
@@ -24,5 +24,5 @@ export default meta;
 
 type Story = StoryObj<PvIconProps>;
 export const Regular: Story = {
-  args: { },
+  args: {},
 };

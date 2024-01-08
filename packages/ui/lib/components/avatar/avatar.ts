@@ -33,7 +33,6 @@ const getSize = (value: AvatarSize) => {
   }
 };
 
-
 /**
  * @tag pv-avatar
  * @summary Pavetra Avatar web component
@@ -41,12 +40,21 @@ const getSize = (value: AvatarSize) => {
 
 @customElement("pv-avatar")
 export default class PvAvatar extends LitElement {
+  /**
+   * The source URL for the avatar image.
+   */
   @property({ type: String, attribute: true })
   src = "";
 
+  /**
+   * The size of the avatar.
+   */
   @property()
   size: AvatarSize = "m";
 
+  /**
+   * The private mask identifier for avatar generation.
+   */
   @state()
   private maskId = `${avatarGeneratorKeys.next().value}`;
 

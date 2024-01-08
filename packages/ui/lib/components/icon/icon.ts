@@ -6,7 +6,7 @@ import {
   html,
 } from "lit";
 import { unsafeSVG } from "lit/directives/unsafe-svg.js";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 
 import { iconsLibrary } from "../../icons/index.ts";
 
@@ -30,11 +30,17 @@ export default class PvIcon extends LitElement {
     this.getIcon(this.name);
   }
 
+  /**
+   * The name associated with the element.
+   */
   @property({ type: String, attribute: true })
   name = "";
 
-  @property({ type: String, state: true })
-  svgCode = "";
+  /**
+   * The private SVG code for the element.
+   */
+  @state()
+  private svgCode = "";
 
   static get styles(): CSSResultGroup {
     return [styles as unknown as CSSResultOrNative];
@@ -43,7 +49,10 @@ export default class PvIcon extends LitElement {
   protected override update(
     changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>,
   ): void {
-    if (changedProperties.has('name') && changedProperties.get('name') !== this.name) {
+    if (
+      changedProperties.has("name") &&
+      changedProperties.get("name") !== this.name
+    ) {
       this.getIcon(this.name);
     }
     super.update(changedProperties);
