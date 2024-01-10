@@ -1,7 +1,7 @@
 import { html } from "lit";
 import { Meta, StoryObj } from "@storybook/web-components";
 
-import "../../../styles/theme.css";
+// import "../../../styles/theme.css";
 import "../text-field.ts";
 import "../../icon/icon.ts";
 
@@ -94,7 +94,7 @@ export const Invalid: Story = {
     valid: false,
   },
   render: ({ invalid, valid }) => {
-    function handleSubmit(e: Event) {;
+    function handleSubmit(e: Event) {
       e.preventDefault();
       const formData = new FormData(e.target as HTMLFormElement);
       console.log(formData);
@@ -102,13 +102,24 @@ export const Invalid: Story = {
 
     return html`<form @submit=${handleSubmit}>
       <label for="text-field">Username</label
-      ><pv-text-field id="text-field" name="username" ?invalid=${invalid} ?valid=${valid}>
+      ><pv-text-field
+        id="text-field"
+        name="username"
+        ?invalid=${invalid}
+        ?valid=${valid}
+      >
         <span slot="help-text"
           >This field is required. Please be "Positive"</span
         >
       </pv-text-field>
       <label for="text-field">Email</label
-      ><pv-text-field type="email" id="email" name="email" ?invalid=${invalid} ?valid=${valid}>
+      ><pv-text-field
+        type="email"
+        id="email"
+        name="email"
+        ?invalid=${invalid}
+        ?valid=${valid}
+      >
         <span slot="help-text">This field is required</span>
       </pv-text-field>
       <pv-button type="submit">Submit</pv-button>

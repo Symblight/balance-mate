@@ -13,8 +13,13 @@ import { rimraf } from "rimraf";
 // const { postCSSPlugins } = cssProcessing;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const styles = path.resolve(
-  path.join(__dirname, "..", "/lib/styles/theme.css")
+  path.join(__dirname, "..", "/lib/styles/theme.css"),
 );
+
+const themes = [
+  path.resolve(path.join(__dirname, "..", "/lib/styles/themes/light.css")),
+  path.resolve(path.join(__dirname, "..", "/lib/styles/themes/dark.css")),
+];
 
 const readFilePromise = util.promisify(fs.readFile);
 
@@ -37,6 +42,16 @@ componentsBuild = esbuild
     entryPoints: [styles],
     bundle: true,
     outfile: "dist/theme.out.css",
+  })
+  .catch(() => process.exit(1));
+
+let themesBuild = Promise.resolve();
+
+themesBuild = esbuild
+  .build({
+    entryPoints: themes,
+    bundle: true,
+    outdir: "dist/themes",
   })
   .catch(() => process.exit(1));
 

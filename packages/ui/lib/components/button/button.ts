@@ -46,38 +46,74 @@ export default class PvButton extends LitElement {
     };
   }
 
+  /**
+   * The form associated with the button.
+   * Type: String or HTMLFormElement
+   */
   @property({ type: String })
   form: HTMLFormElement | string;
 
+  /**
+   * The variant style of the button.
+   */
   @property()
   variant: ButtonVariant = "primary";
 
+  /**
+   * The size of the button.
+   */
   @property({ type: String, attribute: true })
   size: ButtonSize = "m";
 
+  /**
+   * The type of the button.
+   */
   @property()
   type: HTMLButtonElement["type"] = "button";
 
+  /**
+   * Indicates a danger state for the button.
+   */
   @property({ type: Boolean, attribute: true })
   danger: boolean = false;
 
+  /**
+   * Indicates a loading state for the button.
+   */
   @property({ type: Boolean, attribute: true })
   loading: boolean = false;
 
+  /**
+   * The href link for the button.
+   */
   @property({ type: String, attribute: true })
   href: boolean = false;
 
+  /**
+   * Indicates whether the button is disabled.
+   */
   @property({ type: Boolean, attribute: true })
   disabled: boolean = false;
 
+  /**
+   * Indicates whether the button should have rounded corners.
+   */
   @property({ type: Boolean, attribute: true })
   rounded: boolean = false;
 
+  /**
+   * Tracks whether the button slot has content.
+   */
   @state()
   slotHasContent = false;
 
+  /**
+   * The icon associated with the button.
+   */
   @state()
   icon: Node | null = null;
+
+  childrenContent: Node | null | string = null;
 
   static get styles(): CSSResultGroup {
     return [styles as unknown as CSSResultOrNative];
@@ -101,20 +137,34 @@ export default class PvButton extends LitElement {
     }
   }
 
+  handleSlotchange(e: Event) {
+    const childNodes = (e.target as HTMLSlotElement).assignedNodes({
+      flatten: true,
+    }) as Element[];
+
+    this.childrenContent = childNodes
+      .map((node) => (node.textContent ? node.textContent : ""))
+      .join("")
+      .trim();
+  }
+
   get assignedNodesList() {
     const slotSelector = "slot:not([name])";
-    const slotEl = this.renderRoot?.querySelector(slotSelector);
-    // @ts-ignore
+    const slotEl = this.renderRoot?.querySelector(
+      slotSelector,
+    ) as HTMLSlotElement;
     return slotEl?.assignedNodes() ?? [];
   }
 
   manageTextObservedSlot() {
-    const assignedNodes = [...this.assignedNodesList].filter((node) => {
-      if (node.tagName) {
-        return true;
-      }
-      return node.textContent ? node.textContent.trim() : false;
-    });
+    const assignedNodes = [...(this.assignedNodesList as Element[])].filter(
+      (node) => {
+        if (node.tagName) {
+          return true;
+        }
+        return node.textContent ? node.textContent.trim() : false;
+      },
+    );
     this.slotHasContent = assignedNodes.length > 0;
   }
 
@@ -143,16 +193,17 @@ export default class PvButton extends LitElement {
   }
 
   private get classes() {
+    const size = this.size || "m";
     return classMap({
       button_variant_primary: this.variant === "primary",
       button_variant_secondary: this.variant === "secondary",
       button_variant_inline: this.variant === "inline",
       button_variant_ghost: this.variant === "ghost",
       button_variant_link: this.variant === "link",
-      button_size_xs: this.size === "xs",
-      button_size_s: this.size === "s",
-      button_size_m: this.size === "m",
-      button_size_l: this.size === "l",
+      button_size_xs: size === "xs",
+      button_size_s: size === "s",
+      button_size_m: size === "m",
+      button_size_l: size === "l",
       button_disabled: this.disabled,
       button_danger: this.danger,
       button_loading: this.loading,
@@ -162,21 +213,30 @@ export default class PvButton extends LitElement {
   }
 
   private renderIcon() {
-    return when(
-      this.loading,
-      () =>
-        html`<div class="button__icon">
-          <pv-spin class="button__spin" size="xs"></pv-spin>
-        </div>`,
-      () => html`<slot ?icon-only=${!this.slotHasContent} name="icon"></slot>`,
-    );
+    return html`${when(
+        this.loading,
+        () =>
+          html`<div
+            class="button__loading ${classMap({
+              button__icon: !!this.childrenContent,
+            })}"
+          >
+            <pv-spin class="button__spin" size="xs"></pv-spin>
+          </div>`,
+      )}
+      <slot ?icon-only=${!this.slotHasContent} name="icon"> </slot> `;
   }
 
   private renderChildrenContent() {
     return html`
       ${this.renderIcon()}
-      <span id="label" class="button__content">
-        <slot></slot>
+      <span
+        id="label"
+        class="button__content ${classMap({
+          button__content_hidden: !this.childrenContent,
+        })}"
+      >
+        <slot @slotchange=${this.handleSlotchange}></slot>
       </span>
     `;
   }

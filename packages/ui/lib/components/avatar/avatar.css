@@ -9,7 +9,7 @@
   vertical-align: bottom;
   overflow: hidden;
   user-select: none;
-  --avatar-stroke-color: var(--color-opac-w-4);
+  --pv-avatar-stroke-color: var(--pv-color-opac-w-4);
 }
 
 .avatar__image {
@@ -18,10 +18,10 @@
 
 .avatar__rect {
   stroke-width: 0.125rem;
-  stroke: var(--avatar-stroke-color);
+  stroke: var(--pv-avatar-stroke-color);
 }
 
 .avatar__circle {
   stroke-width: 0.125rem;
-  stroke: var(--avatar-stroke-color);
+  stroke: var(--pv-avatar-stroke-color);
 }

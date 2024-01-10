@@ -1,5 +1,6 @@
 :root {
   color-scheme: light;
+  --theme: light;
   /* || GENERAL STYLES */
-  --global-foreground: var(--color-black);
+  --global-foreground: var(--pv-color-black);
 }

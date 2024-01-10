@@ -11,6 +11,9 @@ export type SpinSize = "xs" | "s" | "m" | "l";
  */
 @customElement("pv-spin")
 export default class PvSpin extends LitElement {
+  /**
+   * The size of the spin element.
+   */
   @property({ type: String, attribute: true })
   size: SpinSize = "m";
 
@@ -44,8 +47,7 @@ export default class PvSpin extends LitElement {
 }
 
 declare global {
-    interface HTMLElementTagNameMap {
-      "pv-spin": PvSpin;
-    }
+  interface HTMLElementTagNameMap {
+    "pv-spin": PvSpin;
   }
-  
+}
