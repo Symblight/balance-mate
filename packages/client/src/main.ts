@@ -1,11 +1,27 @@
+import "pv-wc";
+import "pv-wc/theme/theme.css";
+
 import "./app.css";
-import "pv-wc"
-import "pv-wc/theme/theme.css"
 
 import App from "./App.svelte";
+import { $profile } from "./services/profile";
 
-const app = new App({
-  target: document.getElementById("app"),
-});
+const root = document.querySelector("#app")!;
 
-export default app;
+async function getProfile() {
+  const res = await fetch(`/api/profile`);
+  const { data: profile } = await res.json();
+  $profile.set(profile);
+}
+
+export default async function initApp() {
+  await getProfile();
+
+  const app = new App({
+    target: root,
+  });
+
+  return app;
+}
+
+initApp();

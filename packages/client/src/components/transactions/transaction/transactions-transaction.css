@@ -1,1 +1,38 @@
-.transaction {}
+.transaction {
+  display: grid;
+  grid-template-columns: 2rem 1fr 6rem;
+  padding-block: 0.5rem;
+  border-radius: var(--border-radius-base);
+  padding-inline: 0.5rem;
+  cursor: pointer;
+}
+
+.transaction:hover {
+  background-color: var(--color-opac-b-1);
+}
+
+.transaction__description {
+  display: flex;
+  flex-direction: column;
+  column-gap: 0.5rem;
+}
+
+.transaction__logo {
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.transaction__total {
+  font-size: 0.85rem;
+  color: var(--color-dark-gray);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.transaction__date {
+  font-size: 0.8rem;
+  color: var(--color-dark-gray);
+}

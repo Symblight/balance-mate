@@ -1,5 +1,24 @@
+.transactions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
 .transactions__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.transactions__list {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.transactions__item {
 }

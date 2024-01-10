@@ -8,9 +8,17 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  color: var(--global-foreground);
+  text-decoration: none;
 }
 
 .account-head__logo {
   width: 42px;
   height: 42px;
+}
+
+.account-head__profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
