@@ -113,6 +113,7 @@ export default class PvButton extends LitElement {
   @state()
   icon: Node | null = null;
 
+  @state()
   childrenContent: Node | null | string = null;
 
   static get styles(): CSSResultGroup {
