@@ -3,14 +3,14 @@
   import "./transactions.css";
 </script>
 
-<section>
+<section class="transactions">
   <div class="transactions__head">
     <span>All Transactions</span>
-    <pv-button variant="secondary" rounded> See all</pv-button>
+    <pv-button variant="inline" rounded> See all</pv-button>
   </div>
 
-  <ul>
-    <li>
+  <ul class="transactions__list">
+    <li class="transactions__item">
       <Transaction />
     </li>
     <li>

@@ -1,8 +1,21 @@
+@charset "UTF-8";
+
+@import "../node_modules/pv-wc/dist/themes/light.css" screen and (prefers-color-scheme: light);
+@import "../node_modules/pv-wc/dist/themes/dark.css" screen and (prefers-color-scheme: dark);
+
+
 @font-face {
   font-family: "MartianMonoVF";
   src:
     url("/fonts/MartianMonoVF.woff2") format("woff2"),
     url("/fonts/MartianMonoVF.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "ClashGrotesk";
+  src:
+    url("/fonts/ClashGrotesk-Variable.woff2") format("woff2"),
+    url("/fonts/ClashGrotesk-Variable.ttf") format("truetype");
 }
 
 @font-face {
@@ -12,14 +25,22 @@
     url("/fonts/MartianGroteskTRIAL-VFVF.ttf") format("truetype");
 }
 
+/* @import url('styles-light.css'); Default to light mode */
+
+/* @import url("/node_modules/pv-wc/dist/themes/light.css"); */
+
+/* Media query for dark mode */
+@media (prefers-color-scheme: dark) {
+  /* @import url('styles-dark.css');  */
+}
+
 :root {
-  font-family: MartianMonoVF, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family: MartianMonoVF;
+  font-family: var(--font-family), system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--global-foreground);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,13 +49,12 @@
 }
 
 h1 {
-  font-family: MartianGrotesk;
+  font-family: ClashGrotesk;
   font-stretch: 125%;
   font-weight: 900;
 }
 
 h2 {
-  font-family: MartianGrotesk;
   font-stretch: 100%;
   font-weight: 700;
 }
