@@ -15,5 +15,6 @@
     "CLIENT_ID": "",
     "CLIENT_ISSUER": ""
   },
-  "COOKIE_SECRET": "your-secret-key"
+  "COOKIE_SECRET": "your-secret-key",
+  "COOKIE_SALT": "salt"
 }
