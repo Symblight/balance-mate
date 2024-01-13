@@ -1,4 +1,3 @@
-import crypto from "node:crypto";
 import { FastifyInstance } from "fastify";
 import fastifyPlugin from "fastify-plugin";
 import fastifySession from "@fastify/secure-session";
@@ -9,12 +8,6 @@ import * as ProfileOperations from "../operations/create-profile";
 import { generateBaseUrl } from "../configs/app";
 
 const auth0Config: config.IConfig = config.get("auth0");
-
-const generateSalt = () => {
-  const saltLength = 16;
-  return crypto.randomBytes(Math.ceil(saltLength / 2)).toString('hex').slice(0, saltLength);
-};
-
 
 declare module "fastify" {
   export interface FastifyInstance {
@@ -39,7 +32,7 @@ export const auth0Plugin = fastifyPlugin(function (
     sessionName: "session",
     cookieName: "appSession",
     secret: config.get("COOKIE_SECRET"),
-    salt: generateSalt(),
+    salt: config.get("COOKIE_SALT"),
     cookie: {
       path: "/",
     },
@@ -73,7 +66,7 @@ export const auth0Plugin = fastifyPlugin(function (
     const user = (await app.auth0.userinfo(token)) as Auth0User;
     await ProfileOperations.getOrCreateProfileByAuthProviderId(user.sub);
 
-    request.session.set("token", token);
+    request.session.set("token", { ...token, ...user });
 
     return reply.redirect("/");
   });

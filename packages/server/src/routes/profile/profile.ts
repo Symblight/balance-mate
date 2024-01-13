@@ -19,10 +19,7 @@ export default function profileRoutes(fastify: FastifyInstance, opt, next) {
       });
     } catch (error) {
       debug(`Error fetching user profile: ${error.message}`);
-      return reply.status(500).type("json").send({
-        status: "fail",
-        message: error.message,
-      });
+      throw error;
     }
   });
   next();
