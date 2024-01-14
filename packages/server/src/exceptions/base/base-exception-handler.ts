@@ -10,7 +10,7 @@ interface ExceptionBase extends FastifyError {
 }
 
 export class BaseExceptionHandler {
-  defaultHandler(error: FastifyError, ctx: ExceptionContext) {
+  async defaultHandler(error: FastifyError, ctx: ExceptionContext) {
     ctx.reply.status(error.statusCode).send({
       status: "fail",
       validation: error.validation,
@@ -18,19 +18,21 @@ export class BaseExceptionHandler {
     });
   }
 
-  async getBaseHandle(
-    error: ExceptionBase,
-    request: FastifyRequest,
-    reply: FastifyReply,
-  ) {
-    if (error.handle) {
-      error.handle(error, { request, reply });
-    }
+  getBaseHandle() {
+    return async (
+      error: ExceptionBase,
+      request: FastifyRequest,
+      reply: FastifyReply,
+    ) => {
+      if (error.handle) {
+        return error.handle(error, { request, reply });
+      }
 
-    return this.defaultHandler(error, { request, reply });
+      return this.defaultHandler(error, { request, reply });
+    };
   }
 }
 
 const exceptions = new BaseExceptionHandler();
 
-export const HttpExceptionHandler = exceptions.getBaseHandle;
+export const HttpExceptionHandler = exceptions.getBaseHandle();

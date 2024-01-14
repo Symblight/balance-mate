@@ -1,3 +1,5 @@
+import type { Knex } from "knex";
+
 import { Auth0Adapter, Auth0UserInfo } from "../adapters/auth0";
 import { Database } from "../database";
 
@@ -36,8 +38,20 @@ export class ProfileRepository {
     return profile;
   }
 
-  static async createProfileByAuthProviderId(providerId: string) {
-    const [newProfile] = await Database.knex
+  static async getProfileById(id: string) {
+    const [profile] = await Database.knex
+      .select()
+      .from<ProfileDto>("profiles")
+      .where("id", IDBRequest);
+
+    return profile;
+  }
+
+  static async createProfileByAuthProviderId(
+    providerId: string,
+    trx?: Knex.Transaction,
+  ): Promise<ProfileDto> {
+    const [newProfile] = await (trx || Database.knex)
       .insert({ provider_user_id: providerId }, [
         "provider_user_id",
         "id",
