@@ -5,10 +5,11 @@
   border-radius: var(--border-radius-base);
   padding-inline: 0.5rem;
   cursor: pointer;
+  height: 3rem;
 }
 
 .transaction:hover {
-  background-color: var(--color-opac-b-1);
+  background-color: var(--pv-color-opac-b-1);
 }
 
 .transaction__description {
@@ -23,9 +24,9 @@
   align-items: center;
 }
 
-.transaction__total {
+.transaction__amount {
   font-size: 0.85rem;
-  color: var(--color-dark-gray);
+  color: var(--pv-color-dark-gray);
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -34,5 +35,12 @@
 
 .transaction__date {
   font-size: 0.8rem;
-  color: var(--color-dark-gray);
+  color: var(--pv-color-dark-gray);
+}
+
+.transaction__amount_positive {
+  color: var(--pv-color-success);
+}
+.transaction__amount_negative {
+  color: var(--pv-color-danger);
 }

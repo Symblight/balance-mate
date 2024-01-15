@@ -1,0 +1,15 @@
+.account-dialog__form {
+  min-width: 22rem;
+}
+
+.account-dialog__footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.account-dialog__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

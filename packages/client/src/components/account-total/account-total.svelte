@@ -1,27 +1,22 @@
 <script lang="ts">
-  import type { PvDialog } from "pv-wc";
+  import { $account as account } from "../../services/profile";
+  import TransactionDialog from "../transaction-dialog/transaction-dialog.svelte";
+
   import "./account-total.css";
 
-  let dialog: PvDialog | null;
-  let total = 5000;
+  let isTransactionDialogVisible = false;
 
   function handleClick() {
-    if (!dialog) return;
-
-    if (dialog.open) {
-      dialog.close();
-    } else {
-      dialog.show();
-    }
+    isTransactionDialogVisible = true;
   }
 </script>
 
 <section class="account-total__container">
   <section class="account-total__header">
     <div class="account-total__total-container">
-      <pv-icon name="wallet"></pv-icon>
-      <span class="">total:</span>
-      <h2 class="account-total__total-title">{total}</h2>
+      <pv-icon class="account-total__icon" name="wallet"></pv-icon>
+      <span>total:</span>
+      <h2 class="account-total__total-title">{$account.current_balance}</h2>
     </div>
   </section>
 
@@ -35,18 +30,6 @@
     >
       Add transaction
     </pv-button>
-    <pv-dialog headerTitle="Add transaction" bind:this={dialog}>
-      <form method="dialog">
-        <pv-text-field type="number" placeholder="value"></pv-text-field>
-      </form>
-      <div slot="footer">
-        <pv-button variant="primary" role="button" tabindex="0">
-          Create
-        </pv-button>
-        <pv-button formmethod="dialog" variant="secondary" role="button" tabindex="0">
-          Cancel
-        </pv-button>
-      </div>
-    </pv-dialog>
+    <TransactionDialog bind:open={isTransactionDialogVisible} on:create />
   </section>
 </section>
