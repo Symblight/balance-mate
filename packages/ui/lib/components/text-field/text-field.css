@@ -3,6 +3,7 @@
   display: inline-flex;
   flex-direction: column;
   width: 100%;
+  resize: both;
 }
 
 :host {
@@ -46,10 +47,6 @@
 
 .text-field:where(:focus, :active, :hover) {
   --pv-text-field-border-color: var(--pv-text-field-outline-color);
-}
-
-.text-field:focus-assertin {
-  --pv-text-field-background-color: var(--pv-text-field-background-color);
 }
 
 .text-field_disabled {
@@ -184,6 +181,30 @@
 
 .text-field__help-text_valid {
   color: var(--pv-text-field-foreground-color);
+}
+
+.text-field__textarea {
+  display: inline-flex;
+  width: fit-content;
+}
+
+.text-field__textarea-control {
+  display: inline-flex;
+  appearance: textfield;
+  text-indent: 0px;
+  box-sizing: border-box;
+  padding: 0.3rem 0.7rem;
+  background-color: transparent;
+  color: var(--pv-text-field-foreground-color);
+  outline: none;
+  min-width: auto;
+  min-height: 6rem;
+  resize: both;
+  border: none;
+}
+
+.text-field__textarea-control:focus-within {
+  background-color: var(--input-background-color);
 }
 
 @keyframes scale-down {
