@@ -1,7 +1,6 @@
 import { html } from "lit";
 import { Meta, StoryObj } from "@storybook/web-components";
 
-// import "../../../styles/theme.css";
 import "../text-field.ts";
 import "../../icon/icon.ts";
 
@@ -17,6 +16,7 @@ function Template({
   invalid,
   valid,
   placeholder,
+  multiline,
 }: PvTextFieldProps) {
   function handleChange(e) {
     console.log(e.target.value, "value");
@@ -27,6 +27,7 @@ function Template({
       ?readOnly=${readOnly}
       ?invalid=${invalid}
       ?valid=${valid}
+      ?multiline=${multiline}
       size=${size}
       placeholder=${placeholder}
       value=${value}
@@ -49,6 +50,9 @@ const meta = {
       control: { type: "select" }, // Automatically inferred when 'options' is defined
     },
     disabled: {
+      control: { type: "boolean" },
+    },
+    multiline: {
       control: { type: "boolean" },
     },
     readOnly: {
@@ -124,5 +128,13 @@ export const Invalid: Story = {
       </pv-text-field>
       <pv-button type="submit">Submit</pv-button>
     </form> `;
+  },
+};
+
+
+export const Textarea: Story = {
+  render: Template,
+  args: {
+    multiline: true
   },
 };

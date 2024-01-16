@@ -115,6 +115,9 @@ export default class PvTextField extends FormControlMixin(LitElement) {
   @property()
   value = "";
 
+  @property({ type: Boolean, attribute: true, reflect: true })
+  multiline = false;
+
   private handleChange(event: InputEvent) {
     if (this.disabled) return;
     this.value = ((event.target as HTMLInputElement) || null)?.value;
@@ -160,7 +163,11 @@ export default class PvTextField extends FormControlMixin(LitElement) {
     this.prefixSlot = !!prefixSlot;
   }
 
-  private renderPrefix() {
+  get hasValidation() {
+    return this.invalid || this.valid;
+  }
+
+  private get renderPrefix() {
     if (!this.prefixSlot) return nothing;
     return html`<div class="text-field__affix_space_left">
       <div class="text-field__affix">
@@ -169,7 +176,7 @@ export default class PvTextField extends FormControlMixin(LitElement) {
     </div>`;
   }
 
-  private renderSuffix() {
+  private get renderSuffix() {
     if (!this.suffixSlot && !this.invalid && !this.valid) return nothing;
     return html` <div class="text-field__affix_space_right">
       <div class="text-field__affix">
@@ -207,45 +214,86 @@ export default class PvTextField extends FormControlMixin(LitElement) {
     };
   }
 
+  get textFieldClass() {
+    return {
+      "text-field__control_disabled": this.disabled,
+      ...this.textFieldSpaceClass,
+      ...this.textFieldSizeClass,
+    };
+  }
+
+  private get renderInput() {
+    const ariaId = this.hasValidation && this.ariaId;
+    return html`
+      <input
+        part="input"
+        .type=${this.type}
+        .id=${this.id}
+        .name=${this.name}
+        .value=${live(this.value)}
+        .placeholder=${this.placeholder}
+        ?required=${this.required}
+        ?readonly=${this.readOnly}
+        ?disabled=${this.disabled}
+        ?aria-describedby=${ariaId}
+        ?aria-invalid=${this.invalid}
+        @input=${this.handleChange}
+        @focus=${this.handleFocus}
+        @blur=${this.handleBlur}
+        class="text-field__control ${classMap({ ...this.textFieldClass })}"
+      />
+    `;
+  }
+
+  private get renderTextarea() {
+    const ariaId = this.hasValidation && this.ariaId;
+    return html`
+      <textarea
+        part="input"
+        .id=${this.id}
+        .name=${this.name}
+        .value=${live(this.value)}
+        .placeholder=${this.placeholder}
+        ?required=${this.required}
+        ?readonly=${this.readOnly}
+        ?disabled=${this.disabled}
+        ?aria-describedby=${ariaId}
+        ?aria-invalid=${this.invalid}
+        @input=${this.handleChange}
+        @focus=${this.handleFocus}
+        @blur=${this.handleBlur}
+        class="text-field__textarea-control ${classMap({
+          ...this.textFieldClass,
+        })}"
+      ></textarea>
+    `;
+  }
+
+  private get renderControl() {
+    return when(
+      !this.multiline,
+      () => this.renderInput,
+      () => this.renderTextarea,
+    );
+  }
+
   render() {
-    const hasValidation = this.invalid || this.valid;
-    const ariaId = hasValidation && this.ariaId;
+    const ariaId = this.hasValidation && this.ariaId;
     return html`<div
         part="box"
         class="text-field ${classMap({
+          "text-field__textarea": this.multiline,
           "text-field_status_error": this.invalid,
           "text-field_status_success": this.valid,
           "text-field_focused": this._isFocusVisible || this.active,
           "text-field_disabled": this.disabled,
         })}"
       >
-        ${this.renderPrefix()}
-        <input
-          part="input"
-          .type=${this.type}
-          .id=${this.id}
-          .name=${this.name}
-          .value=${live(this.value)}
-          .placeholder=${this.placeholder}
-          ?required=${this.required}
-          ?readonly=${this.readOnly}
-          ?disabled=${this.disabled}
-          @input=${this.handleChange}
-          @focus=${this.handleFocus}
-          @blur=${this.handleBlur}
-          aria-describedby=${ariaId}
-          aria-invalid=${this.invalid}
-          class="text-field__control ${classMap({
-            "text-field__control_disabled": this.disabled,
-            ...this.textFieldSpaceClass,
-            ...this.textFieldSizeClass,
-          })}"
-        />
-        ${this.renderSuffix()}
+        ${this.renderPrefix} ${this.renderControl} ${this.renderSuffix}
       </div>
       <div
         class="text-field__help-text ${classMap({
-          "text-field__help-text_visible": hasValidation,
+          "text-field__help-text_visible": this.hasValidation,
           "text-field__help-text_invalid": this.invalid,
           "text-field__help-text_valid": this.valid,
         })}"
