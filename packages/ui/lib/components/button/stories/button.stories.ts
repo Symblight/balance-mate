@@ -87,3 +87,15 @@ export const WithIcon: Story = {
     variant: "inline",
   },
 };
+
+export const WithIconContent: Story = {
+  args: {
+    children: html`Sign out <pv-icon
+      slot="icon"
+      name="log-out"
+    ></pv-icon>` as unknown as HTMLCollection,
+    variant: "primary",
+  },
+};
+
+

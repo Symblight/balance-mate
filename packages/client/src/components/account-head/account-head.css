@@ -22,3 +22,8 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+.account-head__avatar {
+  display: flex;
+  align-items: center;
+}

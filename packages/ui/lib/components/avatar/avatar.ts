@@ -10,8 +10,8 @@ export type AvatarSize = "xs" | "s" | "m" | "l" | number;
 const avatarGeneratorKeys = generateUniqueKey("avatar-");
 
 const getSize = (value: AvatarSize) => {
-  if (typeof value === "number") {
-    return value;
+  if (value && !Number.isNaN(Number(value))) {
+    return Number(value);
   }
 
   switch (value) {
