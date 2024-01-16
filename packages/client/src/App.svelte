@@ -1,15 +1,15 @@
 <script lang="ts">
+  import { Router, Route } from "svelte-routing";
 
-  import AccountHead from "./components/account-head/account-head.svelte";
-  import AccountTotal from "./components/account-total/account-total.svelte";
-  import PageContainer from "./components/page-container/page-container.svelte";
-  import Transactions from "./components/transactions/transactions.svelte";
+  import Home from "./pages/home/home.svelte";
+  import Transactions from "./pages/transactions/transactions.svelte";
+
+  export let url = "";
 </script>
 
 <main class="page">
-  <PageContainer>
-    <AccountHead />
-    <AccountTotal />
-    <Transactions />
-  </PageContainer>
+  <Router {url}>
+    <Route path="/"><Home /></Route>
+    <Route path="/transactions"><Transactions /></Route>
+  </Router>
 </main>

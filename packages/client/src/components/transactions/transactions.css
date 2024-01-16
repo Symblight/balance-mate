@@ -22,3 +22,14 @@
 
 .transactions__item {
 }
+
+.transactions__label {
+  font-size: 80%;
+  color: var(--pv-color-gray-10);
+}
+
+.transactions__spin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
