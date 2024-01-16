@@ -2,6 +2,10 @@ import { ProfileRepository } from "../repositories/profile";
 
 import createDebug from "../configs/debug";
 
+import { AccountRepository } from "../repositories/account/account";
+
+import { Database } from "../database";
+
 const debug = createDebug("create-profile:operations");
 
 export async function getOrCreateProfileByAuthProviderId(providerId: string) {
@@ -16,9 +20,23 @@ export async function getOrCreateProfileByAuthProviderId(providerId: string) {
       return profile;
     }
 
-    const newProfile =
-      await ProfileRepository.createProfileByAuthProviderId(providerId);
+    // Transaction
+    const trxProvider = Database.knex.transactionProvider();
+    const trx = await trxProvider();
 
+    const newProfile = await ProfileRepository.createProfileByAuthProviderId(
+      providerId,
+      trx,
+    );
+    await AccountRepository.createByProfileId(
+      {
+        profileId: newProfile.id,
+        initialBalance: 0,
+      },
+      trx,
+    );
+
+    await trx.commit();
     debug(`New profile created for provider ID: ${providerId}`);
 
     return newProfile;
