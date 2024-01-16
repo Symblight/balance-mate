@@ -184,12 +184,17 @@
   display: none;
 }
 
-[icon-only] + #label {
-  display: none;
+::slotted([slot="icon"])[icon-only=""] {
+  padding-left: 0;
+}
+
+slot[name="icon"][icon-only=""]::slotted(*) {
+  padding-left: 0;
 }
 
 .button ::slotted([slot="icon"]) {
   margin-inline-start: 0;
+  padding-left: 0.6667rem;
 }
 
 .button__icon {

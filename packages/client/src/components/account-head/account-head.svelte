@@ -12,12 +12,8 @@
     <h1>My wallet</h1>
   </a>
   <div class="account-head__profile">
-    <span>{$profile.info.email}</span>
-    <pv-button use:customLink size="l" variant="link" href="/profile">
-      <pv-avatar slot="icon" size="s" src={$profile.info.picture}></pv-avatar>
-    </pv-button>
-    <pv-button variant="link" danger href="/logout" title="sign out">
-      <pv-icon slot="icon" name="log-out"></pv-icon>
+    <pv-button use:customLink size="l" variant="link" href="/profile" class="account-head__avatar">
+      <pv-avatar slot="icon" size="20" src={$profile.info.picture}></pv-avatar>
     </pv-button>
   </div>
 </div>
