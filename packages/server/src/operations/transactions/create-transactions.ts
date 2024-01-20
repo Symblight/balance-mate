@@ -4,6 +4,7 @@ import { TransactionRepository } from "../../repositories/transaction/transactio
 import { AccountRepository } from "../../repositories/account/account";
 
 import { NotFoundException } from "../../exceptions/not-found-exception";
+import { NegativeBalanceException } from "../../exceptions/negative-balance-exception";
 
 import { Database } from "../../database";
 
@@ -40,6 +41,10 @@ export async function createTransaction({
       currentBalance: currentAccount.current_balance,
       amount,
     });
+
+    if (updatedBalance < 0) {
+      throw new NegativeBalanceException()
+    }
 
     debug(
       "Creating transaction for account ID:",

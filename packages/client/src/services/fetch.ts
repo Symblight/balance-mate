@@ -1,8 +1,20 @@
-type Options = Omit<Partial<Request>, "body"> & { query?: Record<string, any> } & {
+type Options = Omit<Partial<Request>, "body"> & {
+  query?: Record<string, any>;
+} & {
   body?: Record<string, any>;
 };
 
-export async function fetcher(path: string, options?: Options) {
+export type FetcherResponse<T = unknown> = {
+  code: number;
+  status: string;
+  message?: string;
+  data: T;
+};
+
+export async function fetcher<T = unknown>(
+  path: string,
+  options?: Options
+): Promise<FetcherResponse<T>> {
   const headers = new Headers(options?.headers);
   const query = new URLSearchParams(options?.query);
 
@@ -11,6 +23,14 @@ export async function fetcher(path: string, options?: Options) {
   if (body) {
     headers.set("Content-Type", "application/json");
   }
+
+  headers.set("Cache-Control", "private max-age=3600");
+
+  // Expires header for indicating when the response expires
+  headers.set("Expires", new Date(Date.now() + 3600000).toUTCString());
+
+  // Last-Modified header for indicating the last modification time
+  headers.set("Last-Modified", new Date().toUTCString());
 
   const url = new URL(window.location.origin + path);
   const queryString = query.toString() ? `?${query.toString()}` : url.search;

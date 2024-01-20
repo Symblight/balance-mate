@@ -2,6 +2,8 @@ import createDebug from "../../configs/debug";
 
 import { TransactionRepository } from "../../repositories/transaction/transaction";
 import { AccountRepository } from "../../repositories/account/account";
+
+import { NegativeBalanceException } from "../../exceptions/negative-balance-exception";
 import { NotFoundException } from "../../exceptions/not-found-exception";
 
 import { Database } from "../../database";
@@ -43,6 +45,10 @@ export async function updateTransaction({
       Number(currentAccount.current_balance) -
       Number(targetTransaction.amount) +
       Number(amount);
+
+    if (updatedBalance < 0) {
+      throw new NegativeBalanceException()
+    }
 
     const accountTransaction = await TransactionRepository.updateById(
       id,
