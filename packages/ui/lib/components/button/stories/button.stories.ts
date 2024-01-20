@@ -90,12 +90,11 @@ export const WithIcon: Story = {
 
 export const WithIconContent: Story = {
   args: {
-    children: html`Sign out <pv-icon
-      slot="icon"
-      name="log-out"
-    ></pv-icon>` as unknown as HTMLCollection,
+    children: html`Sign out
+      <pv-icon
+        slot="icon"
+        name="log-out"
+      ></pv-icon>` as unknown as HTMLCollection,
     variant: "primary",
   },
 };
-
-

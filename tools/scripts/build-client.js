@@ -27,7 +27,7 @@ const clean = async () => {
   try {
     await clean();
     const files = await fs.readdir(
-      path.join(__dirname, "../../packages/", frontendFolder)
+      path.join(__dirname, "../../packages/", frontendFolder),
     );
 
     for (const file of files) {
@@ -46,4 +46,3 @@ const clean = async () => {
     console.error("Error", err);
   }
 })();
-

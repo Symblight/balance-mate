@@ -21,9 +21,12 @@
   media="screen and (prefers-color-scheme: dark)"
 />
 ```
+
 or
 
 ```css
-@import "../node_modules/pv-wc/dist/themes/light.css" screen and (prefers-color-scheme: light);
-@import "../node_modules/pv-wc/dist/themes/dark.css" screen and (prefers-color-scheme: dark);
+@import "../node_modules/pv-wc/dist/themes/light.css" screen and
+  (prefers-color-scheme: light);
+@import "../node_modules/pv-wc/dist/themes/dark.css" screen and
+  (prefers-color-scheme: dark);
 ```

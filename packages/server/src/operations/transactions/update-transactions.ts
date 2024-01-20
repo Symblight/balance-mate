@@ -47,7 +47,7 @@ export async function updateTransaction({
       Number(amount);
 
     if (updatedBalance < 0) {
-      throw new NegativeBalanceException()
+      throw new NegativeBalanceException();
     }
 
     const accountTransaction = await TransactionRepository.updateById(

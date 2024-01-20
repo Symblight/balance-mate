@@ -10,13 +10,13 @@ import { fetcher } from "./services/fetch";
 const root = document.querySelector("#app")!;
 
 async function getProfile() {
-  const { data: profile }  = await fetcher(`/api/profile`);
+  const { data: profile } = await fetcher(`/api/profile`);
   $profile.set(profile);
 }
 
 async function getAccount() {
   const { data: accounts } = await fetcher(`/api/accounts`);
-  const [defaultAccount] = accounts
+  const [defaultAccount] = accounts;
   $account.set(defaultAccount);
 }
 

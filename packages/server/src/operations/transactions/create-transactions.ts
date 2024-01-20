@@ -43,7 +43,7 @@ export async function createTransaction({
     });
 
     if (updatedBalance < 0) {
-      throw new NegativeBalanceException()
+      throw new NegativeBalanceException();
     }
 
     debug(
@@ -52,11 +52,14 @@ export async function createTransaction({
       `updated balance: `,
       updatedBalance,
     );
-    const accountTransaction = await TransactionRepository.createByAccountId({
-      accountId: currentAccount.id,
-      amount,
-      description,
-    }, trx);
+    const accountTransaction = await TransactionRepository.createByAccountId(
+      {
+        accountId: currentAccount.id,
+        amount,
+        description,
+      },
+      trx,
+    );
 
     await AccountRepository.updateBalanceById(
       {
