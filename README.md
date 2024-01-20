@@ -6,8 +6,8 @@ Track your personal finances effortlessly with our app. Input your financial tra
 
 ## Prerequisites
 
-* Node.js (version 20 or above)
-* pnpm
+- Node.js (version 20 or above)
+- pnpm
 
 ## Installation
 

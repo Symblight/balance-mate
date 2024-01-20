@@ -13,7 +13,7 @@ export type FetcherResponse<T = unknown> = {
 
 export async function fetcher<T = unknown>(
   path: string,
-  options?: Options
+  options?: Options,
 ): Promise<FetcherResponse<T>> {
   const headers = new Headers(options?.headers);
   const query = new URLSearchParams(options?.query);

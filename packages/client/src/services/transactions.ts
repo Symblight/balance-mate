@@ -1,6 +1,6 @@
 import { atom } from "nanostores";
 
-export const $lastTransactions = atom<Transaction[]>([])
+export const $lastTransactions = atom<Transaction[]>([]);
 
 export interface Transaction {
   id: string;

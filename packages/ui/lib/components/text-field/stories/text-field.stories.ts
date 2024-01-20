@@ -131,10 +131,9 @@ export const Invalid: Story = {
   },
 };
 
-
 export const Textarea: Story = {
   render: Template,
   args: {
-    multiline: true
+    multiline: true,
   },
 };

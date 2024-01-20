@@ -27,11 +27,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,css,html,mjs,json,.svelte}": "pnpm run format"
+    "*.{ts,js,jsx,css,html,mjs,json,.svelte}": "pnpm run format"
   },
   "devDependencies": {
     "eslint": "^8.56.0",
-    "husky": "^8.0.3",
+    "husky": "^8.0.0",
     "lint-staged": "^15.2.0",
     "prettier": "^3.1.1",
     "wireit": "^0.14.1"

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { $profile as profile } from "../../services/profile";
 
-  import "./profile-head.css"
+  import "./profile-head.css";
 </script>
 
 <section class="profile-head">

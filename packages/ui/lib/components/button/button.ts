@@ -234,7 +234,7 @@ export default class PvButton extends LitElement {
       <span
         id="label"
         class="button__content ${classMap({
-          button__content_hidden: !this.childrenContent
+          button__content_hidden: !this.childrenContent,
         })}"
       >
         <slot @slotchange=${this.handleSlotchange}></slot>

@@ -7,7 +7,7 @@ const debug = createDebug("profiles:api");
 
 export default function accountRoutes(fastify: FastifyInstance, opt, next) {
   fastify.get("/", async (request, reply) => {
-    const user = fastify.user
+    const user = fastify.user;
 
     try {
       const accounts = await AccountRepository.getAllByProfileId(user.id);

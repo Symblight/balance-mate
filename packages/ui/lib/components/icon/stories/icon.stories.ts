@@ -10,7 +10,10 @@ import { iconsLibrary } from "../../../icons/index.ts";
 
 function Template() {
   return html` ${Object.keys(iconsLibrary).map(
-    (name) => html`<div style="font-size: 1.6rem;"><pv-icon name=${name}></pv-icon></div> `,
+    (name) =>
+      html`<div style="font-size: 1.6rem;">
+        <pv-icon name=${name}></pv-icon>
+      </div> `,
   )}`;
 }
 

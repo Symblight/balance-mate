@@ -62,9 +62,7 @@ const getIconsCode = async (iconFolder) => {
     return getIconFileData(iconFolder, file);
   });
   const body = await Promise.all(icons);
-  return (
-    `${body.reduce((acc, item) => (acc += `\n${  item  },`), store)  }\n}`
-  );
+  return `${body.reduce((acc, item) => (acc += `\n${item},`), store)}\n}`;
 };
 
 const generate = async () => {

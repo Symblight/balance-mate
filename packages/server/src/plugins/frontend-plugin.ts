@@ -8,7 +8,7 @@ const staticPath = path.join(__dirname, "../../public");
 
 export default async function frontendContext(fastify: FastifyInstance) {
   fastify.addHook("onRequest", async (request, reply) => {
-    await authValidation(request, reply)
+    await authValidation(request, reply);
   });
 
   fastify.register(staticPlugin, {
